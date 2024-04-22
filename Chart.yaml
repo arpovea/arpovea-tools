@@ -7,6 +7,7 @@ type: application
 keywords:
   - arpovea-tools
   - utilities
+home: https://blog.arpovea.com
 sources:
   - https://github.com/arpovea/arpovea-tools.git
 icon: https://github.com/arpovea/arpovea-tools/blob/main/icon/logo-arpovea.png
