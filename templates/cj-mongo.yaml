@@ -1,0 +1,39 @@
+{{- if .Values.global.serviceSelector.mongo }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-{{ .Values.mongo.serviceName }}
+  labels:
+    app: {{ .Values.mongo.serviceName }}
+spec:
+  schedule: {{ .Values.mongo.cronTime | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongodump
+            image: 'docker-registry.default.svc:5000/herramientas-horizontales/ocp-utils:{{ .Values.mongo.imageTag }}'
+            imagePullPolicy: Always
+            command: ["/bin/entrypoint_mongo_dump.sh"]
+            resources:
+              requests:
+                cpu: {{ .Values.mongo.reqCpu }}
+                memory: {{ .Values.mongo.reqMemory }}
+            envFrom:
+            - configMapRef:
+                name: cronjob-cm-{{ .Values.mongo.serviceName }}
+            - secretRef:
+                name: cronjob-secret-{{ .Values.mongo.serviceName }}
+            volumeMounts:
+            - name: mongodump
+              mountPath: /mongodump
+          volumes:
+          - name: mongodump
+            persistentVolumeClaim:
+              claimName: {{ .Values.mongo.pvcBackupName }}
+          restartPolicy: Never
+{{- end }}

@@ -1,0 +1,15 @@
+{{- if .Values.global.serviceSelector.mongo }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cronjob-cm-{{ .Values.mongo.serviceName }}
+  labels:
+    app: {{ .Values.mongo.serviceName }}
+data:
+  ALL_DATABASES: {{ .Values.mongo.allDatabases | quote }}
+  BACKUP_DATABASES: {{ .Values.mongo.backupDatabases | quote }}
+  BACKUP_STORAGE: {{ .Values.mongo.backupStorage | quote }}
+  DB_HOST: {{ .Values.mongo.dbHost | quote }}
+  DELETE_OLD_BACKUPS: {{ .Values.mongo.deleteOldBackups | quote }}
+  MAX_BACKUP_DAYS: {{ .Values.mongo.maxBackupDays | quote }}
+{{- end }}
