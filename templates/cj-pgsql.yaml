@@ -1,0 +1,39 @@
+{{- if .Values.global.serviceSelector.pgsql }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-{{ .Values.pgsql.serviceName }}
+  labels:
+    app: {{ .Values.pgsql.serviceName }}
+spec:
+  schedule: {{ .Values.pgsql.cronTime | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: pgdump
+            image: 'docker-registry.default.svc:5000/herramientas-horizontales/ocp-utils:{{ .Values.pgsql.imageTag }}'
+            imagePullPolicy: Always
+            command: ["/bin/entrypoint_postgresql_dump.sh"]
+            resources:
+              requests:
+                cpu: {{ .Values.pgsql.reqCpu }}
+                memory: {{ .Values.pgsql.reqMemory }}
+            envFrom:
+            - configMapRef:
+                name: cronjob-cm-{{ .Values.pgsql.serviceName }}
+            - secretRef:
+                name: cronjob-secret-{{ .Values.pgsql.serviceName }}
+            volumeMounts:
+            - name: pgdump
+              mountPath: /pgdump
+          volumes:
+          - name: pgdump
+            persistentVolumeClaim:
+              claimName: {{ .Values.pgsql.pvcBackupName }}
+          restartPolicy: Never
+{{- end }}

@@ -4,6 +4,7 @@ global:
   serviceSelector:
     minio: true
     mysql: false
+    pgsql: false
     mongo: false
 
 # Valores para el cronjob de backup de minio
@@ -12,7 +13,7 @@ minio:
   user: "defaultUser"
   password: "defaultPassword"
   serviceName: miniodump
-  imageTag: 1.0.11
+  imageTag: "1.0"
   reqMemory: 256Mi
   reqCpu: 200m
   pvcBackupName: backup
@@ -25,7 +26,7 @@ minio:
 # Valores para el cronjob de backup de mysql
 mysql:
   serviceName: mysqldump
-  imageTag: "1.0.0"
+  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: backups
@@ -42,7 +43,7 @@ mysql:
 # Valores para el cronjob de backup de mongo
 mongo:
   serviceName: mongodump
-  imageTag: "1.0.0"
+  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: backups
@@ -52,6 +53,22 @@ mongo:
   backupStorage: "exampleapp1"
   dbHost: "mongodb"
   dbUser: "admin"
+  dbPass: "xxxxxxxxxxx"
+  deleteOldBackups: false
+  maxBackupDays: 7
+
+# Valores para el cronjob de backup de pgsql
+pgsql:
+  serviceName: pgdump
+  imageTag: "1.0"
+  reqMemory: 100Mi
+  reqCpu: 100m
+  pvcBackupName: backups
+  cronTime: "*/5 * * * *"
+  backupDatabases: "basededatos1 basededatos2 sampledb"
+  backupStorage: "exampleapp1"
+  dbHost: "postgresql"
+  dbUser: "root"
   dbPass: "xxxxxxxxxxx"
   deleteOldBackups: false
   maxBackupDays: 7
