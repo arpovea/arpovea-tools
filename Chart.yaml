@@ -1,0 +1,12 @@
+apiVersion: v2
+name: arpovea-tools
+version: "1.0"
+appVersion: "1.0"
+description: Helm chart for deploying the arpovea-tools application
+type: application
+keywords:
+  - arpovea-tools
+  - utilities
+sources:
+  - https://github.com/arpovea/arpovea-tools.git
+icon: https://github.com/arpovea/arpovea-tools/icon/logo-arpovea.png

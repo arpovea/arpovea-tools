@@ -1,0 +1,36 @@
+{{- if .Values.global.serviceSelector.minio }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-{{ .Values.minio.serviceName }}
+  labels:
+    app: {{ .Values.minio.serviceName }}
+spec:
+  schedule: {{ .Values.minio.cronTime }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: miniodump
+            image: image-registry.openshift-image-registry.svc:5000/herramientas-horizontales/ocp-utils:{{ .Values.minio.imageTag }}
+            imagePullPolicy: Always
+            command:
+            - /bin/entrypoint_minio_dump.sh
+            envFrom:
+            - configMapRef:
+                name: cronjob-cm-{{ .Values.minio.serviceName }}
+            - secretRef:
+                name: cronjob-secret-{{ .Values.minio.serviceName }}
+            volumeMounts:
+            - name: miniodump
+              mountPath: {{ .Values.minio.pathBackup }}
+          restartPolicy: Never
+          volumes:
+          - name: miniodump
+            persistentVolumeClaim:
+              claimName: {{ .Values.minio.pvcBackupName }}
+{{- end }}

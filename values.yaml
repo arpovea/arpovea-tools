@@ -1,0 +1,23 @@
+global:
+  serviceSelector:
+    minio: true
+    otraCosa: false
+
+minio:
+  endpoint: http://minio.minio:9000
+  user: "defaultUser"
+  password: "defaultPassword"
+  serviceName: miniodump
+  imageTag: 1.0.11
+  reqMemory: 256Mi
+  reqCpu: 200m
+  pvcBackupName: backup
+  cronTime: "0 3 * * *"
+  pathBackup: /miniodump
+  pathCompress: s3minio
+  deleteOldBackups: false
+  maxBackupDays: 7
+
+mysql:
+  # Aquí van los valores específicos para otro componente
+  exampleValue: 123

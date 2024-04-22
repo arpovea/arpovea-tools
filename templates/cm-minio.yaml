@@ -1,0 +1,13 @@
+{{- if .Values.global.serviceSelector.minio }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cronjob-cm-{{ .Values.minio.serviceName }}
+  labels:
+    app: {{ .Values.minio.serviceName }}
+data:
+  PATH_BACKUP: {{ .Values.minio.pathBackup }}
+  PATH_COMPRESS: {{ .Values.minio.pathCompress }}
+  DELETE_OLD_BACKUPS: {{ .Values.minio.deleteOldBackups | quote }}
+  MAX_BACKUP_DAYS: {{ .Values.minio.maxBackupDays | quote }}
+{{- end }}
