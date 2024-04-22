@@ -1,0 +1,39 @@
+{{- if .Values.global.serviceSelector.mysql }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-{{ .Values.mysql.serviceName }}
+  labels:
+    app: {{ .Values.mysql.serviceName }}
+spec:
+  schedule: {{ .Values.mysql.cronTime | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mysqldump
+            image: 'docker-registry.default.svc:5000/herramientas-horizontales/ocp-utils:{{ .Values.mysql.imageTag }}'
+            imagePullPolicy: Always
+            command: ["/bin/entrypoint_mysql_dump.sh"]
+            resources:
+              requests:
+                cpu: {{ .Values.mysql.reqCpu }}
+                memory: {{ .Values.mysql.reqMemory }}
+            envFrom:
+            - configMapRef:
+                name: cronjob-cm-{{ .Values.mysql.serviceName }}
+            - secretRef:
+                name: cronjob-secret-{{ .Values.mysql.serviceName }}
+            volumeMounts:
+            - name: mysqldump
+              mountPath: /mysqldump
+          volumes:
+          - name: mysqldump
+            persistentVolumeClaim:
+              claimName: {{ .Values.mysql.pvcBackupName }}
+          restartPolicy: Never
+{{- end }}

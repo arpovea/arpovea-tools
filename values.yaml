@@ -1,8 +1,11 @@
+
+# Seleccionamos el aplicativo que queremos desplegar
 global:
   serviceSelector:
     minio: true
-    otraCosa: false
+    mysql: false
 
+# Valores para el cronjob de backup de minio
 minio:
   endpoint: http://minio.minio:9000
   user: "defaultUser"
@@ -18,6 +21,24 @@ minio:
   deleteOldBackups: false
   maxBackupDays: 7
 
+
+# Valores para el cronjob de backup de mysql
 mysql:
-  # Aquí van los valores específicos para otro componente
-  exampleValue: 123
+  serviceName: mysqldump
+  imageTag: "1.0.0"
+  reqMemory: 100Mi
+  reqCpu: 100m
+  pvcBackupName: backups
+  cronTime: "*/5 * * * *"
+  allDatabases: false
+  backupDatabases: "basededatos1 basededatos2 sampledb"
+  backupStorage: "exampleapp1"
+  dbHost: "mysql"
+  dbUser: "root"
+  dbPass: "xxxxxxxxxxx"
+  deleteOldBackups: false
+  maxBackupDays: 7
+
+
+
+
