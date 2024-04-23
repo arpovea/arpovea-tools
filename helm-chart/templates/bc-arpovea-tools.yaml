@@ -1,0 +1,24 @@
+{{- if .Values.createBuildConfig }}
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: {{ .Values.imageStream.name }}
+  labels:
+    app: {{ include "mi-chart.name" . }}
+spec:
+  runPolicy: Serial
+  source:
+    type: Git
+    git:
+      uri: {{ .Values.buildConfig.sourceGitUri }}
+      ref: {{ .Values.buildConfig.sourceGitRef }}
+    contextDir: {{ .Values.buildConfig.sourceContextDir }}
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: {{ .Values.buildConfig.dockerfilePath }}
+  output:
+    to:
+      kind: ImageStreamTag
+      name: {{ .Values.buildConfig.outputImageStreamTag }}
+{{- end }}

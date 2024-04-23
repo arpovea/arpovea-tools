@@ -104,3 +104,18 @@ rsync:
   backupStorage: "exampleapp1"
   deleteOldBackups: false
   maxBackupDays: 7
+
+# Permite habilitar la opción para crear un buildConfig junto a su imageStream para entornos OpenShift
+createBuildConfig: true
+
+imageStream:
+  name: "arpovea-tools"
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+buildConfig:
+  outputImageStreamTag: "arpovea-tools:latest"
+  sourceGitUri: "https://github.com/mi-usuario/mi-repo.git"
+  sourceGitRef: "master"
+  sourceContextDir: "/"
+  dockerfilePath: "Dockerfile"
