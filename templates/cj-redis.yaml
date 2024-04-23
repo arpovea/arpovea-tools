@@ -1,0 +1,39 @@
+{{- if .Values.global.serviceSelector.redis }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-{{ .Values.redis.serviceName }}
+  labels:
+    app: {{ .Values.redis.serviceName }}
+spec:
+  schedule: {{ .Values.redis.cronTime | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: redisdump
+            image: 'docker-registry.default.svc:5000/herramientas-horizontales/ocp-utils:{{ .Values.redis.imageTag }}'
+            imagePullPolicy: Always
+            command: ["/bin/entrypoint_redis_dump.sh"]
+            resources:
+              requests:
+                cpu: {{ .Values.redis.reqCpu }}
+                memory: {{ .Values.redis.reqMemory }}
+            envFrom:
+            - configMapRef:
+                name: cronjob-cm-{{ .Values.redis.serviceName }}
+            - secretRef:
+                name: cronjob-secret-{{ .Values.redis.serviceName }}
+            volumeMounts:
+            - name: redisdump
+              mountPath: /redisdump
+          volumes:
+          - name: redisdump
+            persistentVolumeClaim:
+              claimName: {{ .Values.redis.pvcBackupName }}
+          restartPolicy: Never
+{{- end }}

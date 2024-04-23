@@ -6,6 +6,7 @@ global:
     mysql: false
     pgsql: false
     mongo: false
+    redis: false
 
 # Valores para el cronjob de backup de minio
 minio:
@@ -71,4 +72,21 @@ pgsql:
   dbUser: "root"
   dbPass: "xxxxxxxxxxx"
   deleteOldBackups: false
+  maxBackupDays: 7
+
+# Valores para el cronjob de backup de redis
+redis:
+  serviceName: redisdump
+  imageTag: "1.0.0"
+  reqMemory: 100Mi
+  reqCpu: 100m
+  pvcBackupName: "backups"
+  cronTime: "*/5 * * * *"
+  backupStorage: "exampleapp"
+  dbHost: "redis"
+  dbUser: "root"
+  dbPass: "xxxxxxxxxxx"
+  dbPort: 6379
+  waitSaveRdb: 30
+  deleteOldBackups: true
   maxBackupDays: 7
