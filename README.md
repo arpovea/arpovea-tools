@@ -1,5 +1,7 @@
 # Arpovea-Tools
 
+**Advertencia:** Este repositorio está actualmente en construcción. Las funcionalidades y configuraciones pueden cambiar.
+
 **Arpovea-Tools** es una suite integral diseñada específicamente para entornos Kubernetes y OpenShift. Esta herramienta facilita la gestión y automatización de tareas críticas mediante el uso de cronjobs para la gestión de bases de datos y la copia de volúmenes persistentes (PVC). Además, ofrece funcionalidades robustas para el despliegue de pods a través de deployments equipados con una serie de herramientas esenciales para el debugging y la administración de sistemas.
 
 ## Características Principales
