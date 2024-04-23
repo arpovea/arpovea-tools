@@ -1,0 +1,12 @@
+{{- if .Values.global.serviceSelector.rsync }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cronjob-cm-{{ .Values.rsync.serviceName }}
+  labels:
+    app: {{ .Values.rsync.serviceName }}
+data:
+  BACKUP_STORAGE: {{ .Values.rsync.backupStorage | quote }}
+  DELETE_OLD_BACKUPS: {{ .Values.rsync.deleteOldBackups | quote }}
+  MAX_BACKUP_DAYS: {{ .Values.rsync.maxBackupDays | quote }}
+{{- end }}

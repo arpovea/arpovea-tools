@@ -7,6 +7,7 @@ global:
     pgsql: false
     mongo: false
     redis: false
+    rsync: false
 
 # Valores para el cronjob de backup de minio
 minio:
@@ -89,4 +90,17 @@ redis:
   dbPort: 6379
   waitSaveRdb: 30
   deleteOldBackups: true
+  maxBackupDays: 7
+
+# Valores para el cronjob de backup de rsync
+rsync:
+  serviceName: rsyncdump
+  imageTag: "1.0.0"
+  reqMemory: 100Mi
+  reqCpu: 100m
+  pvcBackupName: "backups"
+  pvcOriginName: "pvc-origin"
+  cronTime: "*/5 * * * *"
+  backupStorage: "exampleapp1"
+  deleteOldBackups: false
   maxBackupDays: 7

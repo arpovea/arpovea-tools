@@ -1,0 +1,43 @@
+{{- if .Values.global.serviceSelector.rsync }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-{{ .Values.rsync.serviceName }}
+  labels:
+    app: {{ .Values.rsync.serviceName }}
+spec:
+  schedule: {{ .Values.rsync.cronTime | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: rsyncdump
+            image: 'docker-registry.default.svc:5000/herramientas-horizontales/ocp-utils:{{ .Values.rsync.imageTag }}'
+            imagePullPolicy: Always
+            command: ["/bin/entrypoint_rsync_dump.sh"]
+            resources:
+              requests:
+                cpu: {{ .Values.rsync.reqCpu }}
+                memory: {{ .Values.rsync.reqMemory }}
+            envFrom:
+            - configMapRef:
+                name: cronjob-cm-{{ .Values.rsync.serviceName }}
+            volumeMounts:
+            - name: rsyncdump
+              mountPath: /rsyncdump
+            - name: rsyncori
+              mountPath: /rsyncori
+              readOnly: true
+          volumes:
+          - name: rsyncdump
+            persistentVolumeClaim:
+              claimName: {{ .Values.rsync.pvcBackupName }}
+          - name: rsyncori
+            persistentVolumeClaim:
+              claimName: {{ .Values.rsync.pvcOriginName }}
+          restartPolicy: Never
+{{- end }}
