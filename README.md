@@ -1,74 +1,21 @@
+# Arpovea-Tools
 
-# Backup Cronjobs Helm Chart
+**Arpovea-Tools** es una suite integral diseñada específicamente para entornos Kubernetes y OpenShift. Esta herramienta facilita la gestión y automatización de tareas críticas mediante el uso de cronjobs para la gestión de bases de datos y la copia de volúmenes persistentes (PVC). Además, ofrece funcionalidades robustas para el despliegue de pods a través de deployments equipados con una serie de herramientas esenciales para el debugging y la administración de sistemas.
 
-**Advertencia:** Este repositorio está actualmente en construcción. Las funcionalidades y configuraciones pueden cambiar.
+## Características Principales
 
-Este chart de Helm está diseñado para facilitar la creación y manejo de cronjobs de backup para diferentes sistemas de gestión de bases de datos como PostgreSQL, MongoDB, MySQL, y MinIO en un entorno Kubernetes.
+- **Gestión de Bases de Datos**: Automatiza backups y operaciones de mantenimiento para diversas bases de datos utilizando cronjobs eficientes y configurables.
+- **Copia de PVC**: Facilita la copia y el respaldo de volúmenes persistentes, asegurando la integridad de los datos en tu clúster.
+- **Herramientas de Debugging**: Incluye un conjunto de herramientas de debugging dentro de los pods desplegados, permitiendo a los administradores de sistemas realizar diagnósticos y resolver problemas rápidamente.
+- **Flexibilidad y Personalización**: Configura y personaliza cronjobs y deployments para adaptarlos a las necesidades específicas de tu entorno operativo.
 
-## Descripción
+# Estructura del Repositorio
 
-Este chart incluye todo lo necesario para configurar cronjobs automáticos que ejecutan backups de bases de datos utilizando herramientas como `pgdump`, `mongodump`, `mysqldump`, y scripts personalizados para MinIO. Cada cronjob puede ser configurado individualmente a través de valores en el archivo `values.yaml`.
+Este repositorio contiene los siguientes componentes principales:
 
-## Pre-requisitos
+- **/helm-charts/**: Contiene el chart de Helm necesario para desplegar nuestras aplicación en entornos Kubernetes/OpenShift.
+- **/docker/**: Almacena los Dockerfiles y otros recursos necesarios para construir las imágenes de Docker utilizadas por el chart de Helm.
+- **/.github/workflows/**: Define nuestras pipelines de integración continua (CI) y entrega continua (CD) utilizando GitHub Actions.
+- **/README.md** y **/LICENSE.md**: Proporcionan información general del proyecto y la licencia bajo la cual se distribuye.
 
-- Kubernetes 1.12+
-- Helm 3.0+
-- Acceso adecuado a un registro de imágenes que contenga las imágenes de utilidades necesarias para los backups.
-
-## Configuración
-
-El chart permite una configuración detallada para cada tipo de backup. Los parámetros configurables incluyen:
-- Intervalos de cron para la ejecución de los jobs.
-- Recursos asignados a cada job.
-- Configuración de conexiones a bases de datos.
-- Gestión de almacenamiento de backups a través de PVCs.
-
-## Instalación
-
-Para instalar el chart con el nombre de lanzamiento `my-backup`, ejecuta:
-
-```bash
-helm install my-backup ./path-to-chart
-```
-
-## Configuración Detallada
-
-### Parámetros Generales
-
-- `global.serviceSelector`: Permite activar o desactivar específicamente los cronjobs para cada base de datos.
-
-### Parámetros Específicos
-
-Cada cronjob tiene configuraciones que pueden ser ajustadas en el `values.yaml`. A continuación se muestra la estructura general para cada tipo:
-
-```yaml
-pgsql:
-  enabled: true
-  serviceName: pgdump
-  imageTag: "1.0.2"
-  reqMemory: "100Mi"
-  reqCpu: "100m"
-  pvcBackupName: "backups"
-  cronTime: "0 3 * * *"
-  ...
-```
-
-### Actualizaciones
-
-Para actualizar tu despliegue después de ajustar el `values.yaml`, ejecuta:
-
-```bash
-helm upgrade my-backup ./path-to-chart
-```
-
-## Desinstalación
-
-Para eliminar el despliegue, utiliza:
-
-```bash
-helm uninstall my-backup
-```
-
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT - ver el archivo `LICENSE.md` para más detalles.
+Cada subdirectorio está adecuadamente documentado con un `README.md` propio que explica su propósito y uso.
