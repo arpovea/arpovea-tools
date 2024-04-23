@@ -6,10 +6,9 @@
 
 ## Características Principales
 
-- **Gestión de Bases de Datos**: Automatiza backups y operaciones de mantenimiento para diversas bases de datos utilizando cronjobs eficientes y configurables.
+- **Backups de Bases de Datos**: Automatiza backups para diversas bases de datos utilizando cronjobs configurables.
 - **Copia de PVC**: Facilita la copia y el respaldo de volúmenes persistentes, asegurando la integridad de los datos en tu clúster.
 - **Herramientas de Debugging**: Incluye un conjunto de herramientas de debugging dentro de los pods desplegados, permitiendo a los administradores de sistemas realizar diagnósticos y resolver problemas rápidamente.
-- **Flexibilidad y Personalización**: Configura y personaliza cronjobs y deployments para adaptarlos a las necesidades específicas de tu entorno operativo.
 
 # Estructura del Repositorio
 
