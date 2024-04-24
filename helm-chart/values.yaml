@@ -2,12 +2,30 @@
 # Seleccionamos el aplicativo que queremos desplegar
 global:
   serviceSelector:
-    minio: true
+    testing: true
+    minio: false
     mysql: false
     pgsql: false
     mongo: false
     redis: false
     rsync: false
+
+
+# Valores para el deployment de testing:
+testing:
+  serviceName: "testing-service"
+  replicas: 1
+  image:
+    repository: "arpovea-tools"
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
 
 # Valores para el cronjob de backup de minio
 minio:
@@ -106,7 +124,7 @@ rsync:
   maxBackupDays: 7
 
 # Permite habilitar la opción para crear un buildConfig junto a su imageStream para entornos OpenShift
-createBuildConfig: true
+createBuildConfig: false
 
 imageStream:
   name: "arpovea-tools"

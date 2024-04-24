@@ -1,0 +1,25 @@
+# templates/testing-deployment.yaml
+{{- if .Values.global.serviceSelector.testing }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.testing.serviceName }}-testing
+  labels:
+    app: {{ .Values.testing.serviceName }}-testing
+spec:
+  replicas: {{ .Values.testing.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.testing.serviceName }}-testing
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.testing.serviceName }}-testing
+    spec:
+      containers:
+        - name: {{ .Values.testing.serviceName }}-testing-container
+          image: "{{ .Values.testing.image.repository }}:{{ .Values.testing.image.tag }}"
+          imagePullPolicy: {{ .Values.testing.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.testing.resources | nindent 12 }}
+{{- end }}
