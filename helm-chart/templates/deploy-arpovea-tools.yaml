@@ -1,4 +1,3 @@
-# templates/testing-deployment.yaml
 {{- if .Values.global.serviceSelector.testing }}
 apiVersion: apps/v1
 kind: Deployment
