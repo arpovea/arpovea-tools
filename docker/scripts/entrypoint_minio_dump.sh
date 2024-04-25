@@ -11,6 +11,7 @@ echo " |_____/|____/  |_____/ \____/|_|  |_|_|     "
 echo "                                             "
 echo -e "\nComenzando copia de seguridad de MINIO"
 
+# Variables ambientales requeridas
 : "${ENDPOINT:?Variable ENDPOINT no definida}"
 : "${USERMINIO:?Variable USERMINIO no definida}"
 : "${PASSWORDMINIO:?Variable PASSWORDMINIO no definida}"
