@@ -1,5 +1,5 @@
 
-# Seleccionamos el aplicativo que queremos desplegar
+# Seleccionamos el servicio que queremos desplegar
 global:
   serviceSelector:
     testing: true

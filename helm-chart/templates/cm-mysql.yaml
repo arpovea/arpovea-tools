@@ -4,6 +4,9 @@ kind: ConfigMap
 metadata:
   name: cronjob-cm-{{ .Values.mysql.serviceName }}
   labels:
+    helm.sh/chart: {{ include "mi-chart.name" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ include "mi-chart.releaseName" . }}
     app: {{ .Values.mysql.serviceName }}
 data:
   ALL_DATABASES: {{ .Values.mysql.allDatabases | quote }}

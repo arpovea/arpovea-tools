@@ -4,6 +4,9 @@ kind: CronJob
 metadata:
   name: cronjob-{{ .Values.mongo.serviceName }}
   labels:
+    helm.sh/chart: {{ include "mi-chart.name" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ include "mi-chart.releaseName" . }}
     app: {{ .Values.mongo.serviceName }}
 spec:
   schedule: {{ .Values.mongo.cronTime | quote }}
