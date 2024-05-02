@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/arpovea/arpovea-tools/blob/main/LICENSE.md)
-[Top Language](https://img.shields.io/github/languages/count/arpovea/arpovea-tools)
-[Version](https://img.shields.io/badge/Version:-1.0-green)
+![Top Language](https://img.shields.io/github/languages/count/arpovea/arpovea-tools)
+![Version](https://img.shields.io/badge/Version:-1.0-green)
 
 # Arpovea-Tools
 
