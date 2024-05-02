@@ -1,3 +1,5 @@
+[![license](https://img.shields.io/badge/license-MIT-blue)](https://github.com/arpovea/arpovea-tools/LICENSE.md)
+
 # Arpovea-Tools
 
 **Advertencia:** Este repositorio está actualmente en construcción. Las funcionalidades y configuraciones pueden cambiar.
