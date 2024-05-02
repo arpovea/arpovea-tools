@@ -9,7 +9,7 @@ Bienvenidos al repositorio de **ARPOVEA-Tools**
   <img src="img/cabezera_arpovea.png" alt="Logo ARPOVEA" style="width: 50%; height: auto;">
 </p>
 
-**Advertencia:** Este repositorio está actualmente en construcción. Las funcionalidades y configuraciones pueden cambiar.
+**Advertencia: Este repositorio está actualmente en construcción. Las funcionalidades y configuraciones pueden cambiar.**
 
 **ARPOVEA-Tools** es una utilidad creada para entornos Kubernetes y OpenShift. Esta herramienta facilita la gestión y automatización de tareas de backups para las bases de datos mediante el uso de cronjobs y la copia de volúmenes persistentes (PVC). Además, facilita el despliegue de un pod a través de deployment que esta equipado con una serie de herramientas esenciales para el debugging y la administración de sistemas.
 
