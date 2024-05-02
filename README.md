@@ -1,4 +1,4 @@
-[![license](https://img.shields.io/badge/license-MIT-blue)](https://github.com/arpovea/arpovea-tools/LICENSE.md)
+[![license](https://img.shields.io/badge/license-MIT-blue)](https://github.com/arpovea/arpovea-tools/blob/main/LICENSE.md)
 
 # Arpovea-Tools
 
