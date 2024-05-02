@@ -6,7 +6,7 @@
 Bienvenidos al repositorio de **arpovea-tools**
 
 <p align="center">
-  <img src="img/cabezera_arpovea.png" alt="Logo arpovea" width="300" height="200">
+  <img src="img/cabezera_arpovea.png" alt="Logo arpovea" style="width: 50%; height: auto;">
 </p>
 
 **Advertencia:** Este repositorio está actualmente en construcción. Las funcionalidades y configuraciones pueden cambiar.
