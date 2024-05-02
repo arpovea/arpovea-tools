@@ -1,17 +1,17 @@
-# Arpovea-Tools
+# ARPOVEA-Tools
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/arpovea/arpovea-tools/blob/main/LICENSE.md)
 ![Top Language](https://img.shields.io/github/languages/top/arpovea/arpovea-tools?label=Shell&color=red)
 ![Version](https://img.shields.io/badge/Version:-1.0-green)
 
-Bienvenidos al repositorio de **arpovea-tools**
+Bienvenidos al repositorio de **ARPOVEA-Tools**
 
 <p align="center">
-  <img src="img/cabezera_arpovea.png" alt="Logo arpovea" style="width: 50%; height: auto;">
+  <img src="img/cabezera_arpovea.png" alt="Logo ARPOVEA" style="width: 50%; height: auto;">
 </p>
 
 **Advertencia:** Este repositorio está actualmente en construcción. Las funcionalidades y configuraciones pueden cambiar.
 
-**Arpovea-Tools** es una utilidad creada para entornos Kubernetes y OpenShift. Esta herramienta facilita la gestión y automatización de tareas de backups para las bases de datos mediante el uso de cronjobs y la copia de volúmenes persistentes (PVC). Además, facilita el despliegue de un pod a través de deployment que esta equipado con una serie de herramientas esenciales para el debugging y la administración de sistemas.
+**ARPOVEA-Tools** es una utilidad creada para entornos Kubernetes y OpenShift. Esta herramienta facilita la gestión y automatización de tareas de backups para las bases de datos mediante el uso de cronjobs y la copia de volúmenes persistentes (PVC). Además, facilita el despliegue de un pod a través de deployment que esta equipado con una serie de herramientas esenciales para el debugging y la administración de sistemas.
 
 ## Características Principales
 
