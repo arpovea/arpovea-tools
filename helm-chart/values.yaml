@@ -96,7 +96,7 @@ pgsql:
 # Valores para el cronjob de backup de redis
 redis:
   serviceName: redisdump
-  imageTag: "1.0.0"
+  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: "backups"
@@ -113,7 +113,7 @@ redis:
 # Valores para el cronjob de backup de rsync
 rsync:
   serviceName: rsyncdump
-  imageTag: "1.0.0"
+  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: "backups"
