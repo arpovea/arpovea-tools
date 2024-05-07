@@ -1,0 +1,57 @@
+# Patterns to ignore when building packages.
+# This supports shell glob matching, relative path matching, and
+# negation (prefixed with !). Only one pattern per line.
+
+# System files
+.DS_Store
+
+# Version control systems
+.git/
+.gitignore
+.bzr/
+.bzrignore
+.hg/
+.hgignore
+.svn/
+
+# Backup and temporary files
+*.swp
+*.bak
+*.tmp
+*~
+# Owner files
+OWNERS
+
+# IDEs and text editors
+.project
+.idea/
+*.tmproj
+.vscode/
+
+# Dependency files
+node_modules/
+Chart.lock
+
+# Files and directories not necessary on the server
+tests/
+scripts/
+examples/
+docs/
+*.md
+LICENSE
+*.pdf
+*.txt
+
+# Image files
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Configuration files
+values.production.yaml
+values.development.yaml
+
+# Ignore all log files and temp files.
+*.log
+*.temp
