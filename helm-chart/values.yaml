@@ -13,7 +13,6 @@ global:
   image: "arpovea/arpovea-tools"
   imageTag: "1.0"
 
-
 # Valores para el deployment de testing:
 testing:
   serviceName: "testing-service"
@@ -47,7 +46,6 @@ minio:
 # Valores para el cronjob de backup de mysql
 mysql:
   serviceName: mysqldump
-  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: backups
@@ -64,7 +62,6 @@ mysql:
 # Valores para el cronjob de backup de mongo
 mongo:
   serviceName: mongodump
-  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: backups
@@ -81,7 +78,6 @@ mongo:
 # Valores para el cronjob de backup de pgsql
 pgsql:
   serviceName: pgdump
-  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: backups
@@ -97,7 +93,6 @@ pgsql:
 # Valores para el cronjob de backup de redis
 redis:
   serviceName: redisdump
-  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: "backups"
@@ -114,7 +109,6 @@ redis:
 # Valores para el cronjob de backup de rsync
 rsync:
   serviceName: rsyncdump
-  imageTag: "1.0"
   reqMemory: 100Mi
   reqCpu: 100m
   pvcBackupName: "backups"
