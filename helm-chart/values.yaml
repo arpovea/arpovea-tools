@@ -66,6 +66,7 @@ mysql:
   allDatabases: false
   backupDatabases: "basededatos1 basededatos2 sampledb"
   backupStorage: "exampleapp1"
+  existingSecret: ""
   dbHost: "mysql"
   dbUser: "root"
   dbPass: "xxxxxxxxxxx"
@@ -82,6 +83,7 @@ mongo:
   allDatabases: false
   backupDatabases: "basededatos1 basededatos2 sampledb"
   backupStorage: "exampleapp1"
+  existingSecret: ""
   dbHost: "mongodb"
   dbUser: "admin"
   dbPass: "xxxxxxxxxxx"
@@ -97,6 +99,7 @@ pgsql:
   cronTime: "*/5 * * * *"
   backupDatabases: "basededatos1 basededatos2 sampledb"
   backupStorage: "exampleapp1"
+  existingSecret: ""
   dbHost: "postgresql"
   dbUser: "root"
   dbPass: "xxxxxxxxxxx"
@@ -111,6 +114,7 @@ redis:
   pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   backupStorage: "exampleapp"
+  existingSecret: ""
   dbHost: "redis"
   dbUser: "root"
   dbPass: "xxxxxxxxxxx"
