@@ -2,7 +2,7 @@
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "mi-chart.fullname" -}}
+{{- define "arpovea-tools.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -18,13 +18,13 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "mi-chart.name" -}}
+{{- define "arpovea-tools.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Generate the name of the release.
 */}}
-{{- define "mi-chart.releaseName" -}}
+{{- define "arpovea-tools.releaseName" -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}

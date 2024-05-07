@@ -4,9 +4,9 @@ kind: CronJob
 metadata:
   name: cronjob-{{ .Values.redis.serviceName }}
   labels:
-    helm.sh/chart: {{ include "mi-chart.name" . }}
+    helm.sh/chart: {{ include "arpovea-tools.name" . }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ include "mi-chart.releaseName" . }}
+    app.kubernetes.io/instance: {{ include "arpovea-tools.releaseName" . }}
     app: {{ .Values.redis.serviceName }}
 spec:
   schedule: {{ .Values.redis.cronTime | quote }}
