@@ -13,6 +13,20 @@ global:
   image: "arpovea/arpovea-tools"
   imageTag: "1.0"
 
+# Permite habilitar la opción para crear un buildConfig junto a su imageStream para entornos OpenShift
+openshift:
+  createBuildConfig: false
+
+  imageStream:
+    name: "arpovea-tools"
+
+  buildConfig:
+    outputImageStreamTag: "arpovea-tools:1.0"
+    sourceGitUri: "https://github.com/arpovea/arpovea-tools.git"
+    sourceGitRef: "main"
+    sourceContextDir: "docker"
+    dockerfilePath: "Dockerfile"
+
 # Valores para el deployment de testing:
 testing:
   serviceName: "testing-service"
@@ -117,16 +131,3 @@ rsync:
   backupStorage: "exampleapp1"
   deleteOldBackups: false
   maxBackupDays: 7
-
-# Permite habilitar la opción para crear un buildConfig junto a su imageStream para entornos OpenShift
-createBuildConfig: false
-
-imageStream:
-  name: "arpovea-tools"
-
-buildConfig:
-  outputImageStreamTag: "arpovea-tools:1.0"
-  sourceGitUri: "https://github.com/arpovea/arpovea-tools.git"
-  sourceGitRef: "main"
-  sourceContextDir: "docker"
-  dockerfilePath: "Dockerfile"

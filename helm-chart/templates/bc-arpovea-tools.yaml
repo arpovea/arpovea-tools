@@ -1,8 +1,8 @@
-{{- if .Values.createBuildConfig }}
+{{- if .Values.openshift.createBuildConfig }}
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
-  name: {{ .Values.imageStream.name }}
+  name: {{ .Values.openshift.imageStream.name }}
   labels:
     helm.sh/chart: {{ include "arpovea-tools.name" . }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -12,15 +12,15 @@ spec:
   source:
     type: Git
     git:
-      uri: {{ .Values.buildConfig.sourceGitUri }}
-      ref: {{ .Values.buildConfig.sourceGitRef }}
-    contextDir: {{ .Values.buildConfig.sourceContextDir }}
+      uri: {{ .Values.openshift.buildConfig.sourceGitUri }}
+      ref: {{ .Values.openshift.buildConfig.sourceGitRef }}
+    contextDir: {{ .Values.openshift.buildConfig.sourceContextDir }}
   strategy:
     type: Docker
     dockerStrategy:
-      dockerfilePath: {{ .Values.buildConfig.dockerfilePath }}
+      dockerfilePath: {{ .Values.openshift.buildConfig.dockerfilePath }}
   output:
     to:
       kind: ImageStreamTag
-      name: {{ .Values.buildConfig.outputImageStreamTag }}
+      name: {{ .Values.openshift.buildConfig.outputImageStreamTag }}
 {{- end }}
