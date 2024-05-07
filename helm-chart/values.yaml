@@ -126,7 +126,7 @@ imageStream:
 
 buildConfig:
   outputImageStreamTag: "arpovea-tools:1.0"
-  sourceGitUri: "https://github.com/mi-usuario/mi-repo.git"
+  sourceGitUri: "https://github.com/arpovea/arpovea-tools.git"
   sourceGitRef: "main"
   sourceContextDir: "docker"
   dockerfilePath: "Dockerfile"
