@@ -29,26 +29,26 @@ testing:
 
 # Valores para el cronjob de backup de minio
 minio:
-  endpoint: http://minio.minio:9000
+  serviceName: "miniodump"
+  endpoint: "http://minio.minio:9000"
   existingSecret: ""
   user: "defaultUser"
   password: "defaultPassword"
-  serviceName: miniodump
-  reqMemory: 256Mi
-  reqCpu: 200m
-  pvcBackupName: backup
+  reqMemory: "256Mi"
+  reqCpu: "200m"
+  pvcBackupName: "backups"
   cronTime: "0 3 * * *"
-  pathBackup: /miniodump
-  pathCompress: s3minio
+  pathBackup: "/miniodump"
+  pathCompress: "s3minio"
   deleteOldBackups: false
   maxBackupDays: 7
 
 # Valores para el cronjob de backup de mysql
 mysql:
-  serviceName: mysqldump
-  reqMemory: 100Mi
-  reqCpu: 100m
-  pvcBackupName: backups
+  serviceName: "mysqldump"
+  reqMemory: "100Mi"
+  reqCpu: "100m"
+  pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   allDatabases: false
   backupDatabases: "basededatos1 basededatos2 sampledb"
@@ -61,10 +61,10 @@ mysql:
 
 # Valores para el cronjob de backup de mongo
 mongo:
-  serviceName: mongodump
-  reqMemory: 100Mi
-  reqCpu: 100m
-  pvcBackupName: backups
+  serviceName: "mongodump"
+  reqMemory: "100Mi"
+  reqCpu: "100m"
+  pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   allDatabases: false
   backupDatabases: "basededatos1 basededatos2 sampledb"
@@ -77,10 +77,10 @@ mongo:
 
 # Valores para el cronjob de backup de pgsql
 pgsql:
-  serviceName: pgdump
-  reqMemory: 100Mi
-  reqCpu: 100m
-  pvcBackupName: backups
+  serviceName: "pgdump"
+  reqMemory: "100Mi"
+  reqCpu: "100m"
+  pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   backupDatabases: "basededatos1 basededatos2 sampledb"
   backupStorage: "exampleapp1"
@@ -92,9 +92,9 @@ pgsql:
 
 # Valores para el cronjob de backup de redis
 redis:
-  serviceName: redisdump
-  reqMemory: 100Mi
-  reqCpu: 100m
+  serviceName: "redisdump"
+  reqMemory: "100Mi"
+  reqCpu: "100m"
   pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   backupStorage: "exampleapp"
@@ -108,9 +108,9 @@ redis:
 
 # Valores para el cronjob de backup de rsync
 rsync:
-  serviceName: rsyncdump
-  reqMemory: 100Mi
-  reqCpu: 100m
+  serviceName: "rsyncdump"
+  reqMemory: "100Mi"
+  reqCpu: "100m"
   pvcBackupName: "backups"
   pvcOriginName: "pvc-origin"
   cronTime: "*/5 * * * *"
