@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.testing.serviceName }}-testing
+  name: {{ .Values.testing.serviceName }}
   labels:
     helm.sh/chart: {{ include "arpovea-tools.name" . }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/instance: {{ include "arpovea-tools.releaseName" . }}
-    app: {{ .Values.testing.serviceName }}-testing
+    app: {{ .Values.testing.serviceName }}
 spec:
   replicas: {{ .Values.testing.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.testing.serviceName }}-testing
+      app: {{ .Values.testing.serviceName }}
   template:
     metadata:
       labels:
-        app: {{ .Values.testing.serviceName }}-testing
+        app: {{ .Values.testing.serviceName }}
     spec:
       containers:
-        - name: {{ .Values.testing.serviceName }}-testing-container
+        - name: {{ .Values.testing.serviceName }}-container
           image: '{{ .Values.global.registry }}/{{ .Values.global.image }}:{{ .Values.global.imageTag }}'
           imagePullPolicy: {{ .Values.testing.image.pullPolicy }}
           resources:
