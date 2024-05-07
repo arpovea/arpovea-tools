@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: {{ .Values.testing.serviceName }}-testing-container
-          image: "{{ .Values.testing.image.repository }}:{{ .Values.testing.image.tag }}"
+          image: '{{ .Values.global.registry }}/{{ .Values.global.image }}:{{ .Values.global.imageTag }}'
           imagePullPolicy: {{ .Values.testing.image.pullPolicy }}
           resources:
             {{- toYaml .Values.testing.resources | nindent 12 }}

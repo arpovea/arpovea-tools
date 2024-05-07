@@ -19,8 +19,6 @@ testing:
   serviceName: "testing-service"
   replicas: 1
   image:
-    repository: "arpovea-tools"
-    tag: "latest"
     pullPolicy: IfNotPresent
   resources:
     requests:
