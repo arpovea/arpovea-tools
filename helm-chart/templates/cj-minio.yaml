@@ -19,7 +19,7 @@ spec:
         spec:
           containers:
           - name: miniodump
-            image: image-registry.openshift-image-registry.svc:5000/herramientas-horizontales/ocp-utils:{{ .Values.minio.imageTag }}
+            image: '{{ .Values.global.registry }}/{{ .Values.global.image }}:{{ .Values.global.imageTag }}'
             imagePullPolicy: Always
             command:
             - /bin/entrypoint_minio_dump.sh
@@ -27,7 +27,7 @@ spec:
             - configMapRef:
                 name: cronjob-cm-{{ .Values.minio.serviceName }}
             - secretRef:
-                name: cronjob-secret-{{ .Values.minio.serviceName }}
+                name: {{ if .Values.minio.existingSecret }}{{ .Values.minio.existingSecret }}{{ else }}cronjob-secret-{{ .Values.minio.serviceName }}{{ end }}
             volumeMounts:
             - name: miniodump
               mountPath: {{ .Values.minio.pathBackup }}

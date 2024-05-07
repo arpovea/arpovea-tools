@@ -19,7 +19,7 @@ spec:
         spec:
           containers:
           - name: rsyncdump
-            image: 'docker-registry.default.svc:5000/herramientas-horizontales/ocp-utils:{{ .Values.rsync.imageTag }}'
+            image: '{{ .Values.global.registry }}/{{ .Values.global.image }}:{{ .Values.global.imageTag }}'
             imagePullPolicy: Always
             command: ["/bin/entrypoint_rsync_dump.sh"]
             resources:
