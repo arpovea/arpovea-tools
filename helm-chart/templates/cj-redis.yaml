@@ -30,7 +30,7 @@ spec:
             - configMapRef:
                 name: cronjob-cm-{{ .Values.redis.serviceName }}
             - secretRef:
-                name: cronjob-secret-{{ .Values.redis.serviceName }}
+                name: {{ if .Values.redis.existingSecret }}{{ .Values.redis.existingSecret }}{{ else }}cronjob-secret-{{ .Values.redis.serviceName }}{{ end }}
             volumeMounts:
             - name: redisdump
               mountPath: /redisdump

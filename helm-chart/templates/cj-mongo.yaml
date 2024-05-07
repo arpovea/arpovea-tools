@@ -30,7 +30,7 @@ spec:
             - configMapRef:
                 name: cronjob-cm-{{ .Values.mongo.serviceName }}
             - secretRef:
-                name: cronjob-secret-{{ .Values.mongo.serviceName }}
+                name: {{ if .Values.mongo.existingSecret }}{{ .Values.mongo.existingSecret }}{{ else }}cronjob-secret-{{ .Values.mongo.serviceName }}{{ end }}
             volumeMounts:
             - name: mongodump
               mountPath: /mongodump

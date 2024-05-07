@@ -30,7 +30,7 @@ spec:
             - configMapRef:
                 name: cronjob-cm-{{ .Values.mysql.serviceName }}
             - secretRef:
-                name: cronjob-secret-{{ .Values.mysql.serviceName }}
+                name: {{ if .Values.mysql.existingSecret }}{{ .Values.mysql.existingSecret }}{{ else }}cronjob-secret-{{ .Values.mysql.serviceName }}{{ end }}
             volumeMounts:
             - name: mysqldump
               mountPath: /mysqldump
