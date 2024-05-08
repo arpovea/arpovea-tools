@@ -2,14 +2,17 @@
 
 set -eo pipefail
 
-echo "   _____ ____    _____  _    _ __  __ _____  "
-echo "  / ____|___ \  |  __ \| |  | |  \/  |  __ \ "
-echo " | (___   __) | | |  | | |  | | \  / | |__) |"
-echo "  \___ \ |__ <  | |  | | |  | | |\/| |  ___/ "
-echo "  ____) |___) | | |__| | |__| | |  | | |     "
-echo " |_____/|____/  |_____/ \____/|_|  |_|_|     "
-echo "                                             "
-echo -e "\nComenzando copia de seguridad de MINIO"
+cat << 'EOF'
+   _____ ____    _____  _    _ __  __ _____  
+  / ____|___ \  |  __ \| |  | |  \/  |  __ \ 
+ | (___   __) | | |  | | |  | | \  / | |__) |
+  \___ \ |__ <  | |  | | |  | | |\/| |  ___/ 
+  ____) |___) | | |__| | |__| | |  | | |     
+ |_____/|____/  |_____/ \____/|_|  |_|_|     
+                                            
+EOF
+
+echo "Comenzando copia de seguridad de MINIO"
 
 # Variables ambientales requeridas
 : "${ENDPOINT:?Variable ENDPOINT no definida}"
