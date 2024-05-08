@@ -18,8 +18,8 @@ echo "Comenzando copia de seguridad de MINIO"
 : "${ENDPOINT:?Variable ENDPOINT no definida}"
 : "${USERMINIO:?Variable USERMINIO no definida}"
 : "${PASSWORDMINIO:?Variable PASSWORDMINIO no definida}"
-: "${PATH_BACKUP:?Variable PATH_BACKUP no definida}"
 
+PATH_BACKUP=${PATH_BACKUP:-/miniodump}
 PATH_COMPRESS="${PATH_COMPRESS:-s3minio}"
 MAX_BACKUP_DAYS="${MAX_BACKUP_DAYS:-7}"
 DELETE_OLD_BACKUPS="${DELETE_OLD_BACKUPS:-false}"
