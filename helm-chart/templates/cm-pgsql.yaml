@@ -11,7 +11,6 @@ metadata:
 data:
   BACKUP_DATABASES: {{ .Values.pgsql.backupDatabases | quote }}
   BACKUP_STORAGE: {{ .Values.pgsql.backupStorage | quote }}
-  DB_HOST: {{ .Values.pgsql.dbHost | quote }}
   DELETE_OLD_BACKUPS: {{ .Values.pgsql.deleteOldBackups | quote }}
   MAX_BACKUP_DAYS: {{ .Values.pgsql.maxBackupDays | quote }}
 {{- end }}
