@@ -12,7 +12,6 @@ data:
   ALL_DATABASES: {{ .Values.mysql.allDatabases | quote }}
   BACKUP_DATABASES: {{ .Values.mysql.backupDatabases | quote }}
   BACKUP_STORAGE: {{ .Values.mysql.backupStorage | quote }}
-  DB_HOST: {{ .Values.mysql.dbHost | quote }}
   DELETE_OLD_BACKUPS: {{ .Values.mysql.deleteOldBackups | quote }}
   MAX_BACKUP_DAYS: {{ .Values.mysql.maxBackupDays | quote }}
 {{- end }}
