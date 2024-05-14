@@ -10,8 +10,6 @@ metadata:
     app: {{ .Values.redis.serviceName }}
 data:
   BACKUP_STORAGE: {{ .Values.redis.backupStorage | quote }}
-  DB_HOST: {{ .Values.redis.dbHost | quote }}
-  DB_PORT: {{ .Values.redis.dbPort | quote }}
   WAIT_SAVE_RDB: {{ .Values.redis.waitSaveRdb | quote }}
   DELETE_OLD_BACKUPS: {{ .Values.redis.deleteOldBackups | quote }}
   MAX_BACKUP_DAYS: {{ .Values.redis.maxBackupDays | quote }}
