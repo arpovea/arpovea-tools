@@ -25,10 +25,10 @@ echo "Iniciando backup de MongoDB..."
 : "${DB_HOST:?ERROR: Falta la variable de entorno DB_HOST}"
 
 # Variables de entorno y valores por defecto
+BACKUP_STORAGE="${BACKUP_STORAGE:-/mongodump}"
 DB_PORT="${DB_PORT:-27017}"
 ALL_DATABASES="${ALL_DATABASES:-false}"
 BACKUP_DATABASES="${BACKUP_DATABASES:-mydatabase}"
-BACKUP_STORAGE="${BACKUP_STORAGE:-/mongodump}"
 DATE_BACKUP=$(date +%Y%m%d%H%M)
 DELETE_OLD_BACKUPS="${DELETE_OLD_BACKUPS:-false}"
 MAX_BACKUP_DAYS="${MAX_BACKUP_DAYS:-7}"
