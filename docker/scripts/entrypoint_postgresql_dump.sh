@@ -24,9 +24,9 @@ echo "Iniciando backup de PostgreSQL..."
 : "${DB_USER:?ERROR: Falta la variable de entorno DB_USER}"
 : "${DB_PASS:?ERROR: Falta la variable de entorno DB_PASS}"
 : "${DB_HOST:?ERROR: Falta la variable de entorno DB_HOST}"
-: "${BACKUP_STORAGE:?ERROR: Falta la variable de entorno BACKUP_STORAGE}"
 
 # Variables de entorno y valores por defecto
+BACKUP_STORAGE="${BACKUP_STORAGE:-/pgdump}"
 DB_PORT="${DB_PORT:-5432}"
 BACKUP_DATABASES="${BACKUP_DATABASES:-mydatabase}"
 DATE_BACKUP=$(date +%Y%m%d%H%M)
