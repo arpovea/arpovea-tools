@@ -29,6 +29,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{secrets.GITACTIONS}}
           fetch-depth: 0 # Fetch all history for all tags and branches
 
       - name: Configure Git
