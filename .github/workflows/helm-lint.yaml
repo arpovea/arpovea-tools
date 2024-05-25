@@ -29,12 +29,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: 'main'
+          fetch-depth: 0 # Fetch all history for all tags and branches
 
-      - name: Merge develop into main
+      - name: Configure Git
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
-          git merge --no-ff origin/develop -m "Merging changes from develop to main"
+
+      - name: Merge develop into main
+        run: |
+          git fetch origin
+          git checkout main
+          git merge origin/develop --no-ff -m "Merging changes from develop to main"
           git push origin main
 
