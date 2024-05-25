@@ -24,8 +24,11 @@ spec:
             command: ["/bin/entrypoint_postgresql_dump.sh"]
             resources:
               requests:
-                cpu: {{ .Values.pgsql.reqCpu }}
-                memory: {{ .Values.pgsql.reqMemory }}
+                cpu: {{ .Values.pgsql.resources.requests.cpu }}
+                memory: {{ .Values.pgsql.resources.requests.memory }}
+              limits:
+                cpu: {{ .Values.pgsql.resources.limits.cpu }}
+                memory: {{ .Values.pgsql.resources.limits.memory }}
             envFrom:
             - configMapRef:
                 name: cronjob-cm-{{ .Values.pgsql.serviceName }}

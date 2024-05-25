@@ -24,8 +24,11 @@ spec:
             command: ["/bin/entrypoint_mongo_dump.sh"]
             resources:
               requests:
-                cpu: {{ .Values.mongo.reqCpu }}
-                memory: {{ .Values.mongo.reqMemory }}
+                cpu: {{ .Values.mongo.resources.requests.cpu }}
+                memory: {{ .Values.mongo.resources.requests.memory }}
+              limits:
+                cpu: {{ .Values.mongo.resources.limits.cpu }}
+                memory: {{ .Values.mongo.resources.limits.memory }}
             envFrom:
             - configMapRef:
                 name: cronjob-cm-{{ .Values.mongo.serviceName }}

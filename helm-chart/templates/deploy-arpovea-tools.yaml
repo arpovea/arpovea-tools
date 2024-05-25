@@ -23,5 +23,10 @@ spec:
           image: '{{ .Values.global.registry }}/{{ .Values.global.image }}:{{ .Values.global.imageTag }}'
           imagePullPolicy: {{ .Values.testing.image.pullPolicy }}
           resources:
-            {{- toYaml .Values.testing.resources | nindent 12 }}
+            requests:
+              cpu: {{ .Values.testing.resources.requests.cpu }}
+              memory: {{ .Values.testing.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.testing.resources.limits.cpu }}
+              memory: {{ .Values.testing.resources.limits.memory }}
 {{- end }}

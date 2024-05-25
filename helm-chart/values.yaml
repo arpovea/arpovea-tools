@@ -20,7 +20,7 @@ openshift:
     name: "arpovea-tools"
 
   buildConfig:
-    outputImageStreamTag: "arpovea-tools:1.0"
+    outputImageStreamTag: "arpovea-tools:latest"
     sourceGitUri: "https://github.com/arpovea/arpovea-tools.git"
     sourceGitRef: "main"
     sourceContextDir: "docker"
@@ -43,12 +43,17 @@ testing:
 # Valores para el cronjob de backup de minio
 minio:
   serviceName: "miniodump"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
   endpoint: "http://minio.minio:9000"
   existingSecret: ""
   user: "defaultUser"
   password: "defaultPassword"
-  reqMemory: "256Mi"
-  reqCpu: "200m"
   pvcBackupName: "backups"
   cronTime: "0 3 * * *"
   pathBackup: "/miniodump"
@@ -59,8 +64,13 @@ minio:
 # Valores para el cronjob de backup de mysql
 mysql:
   serviceName: "mysqldump"
-  reqMemory: "100Mi"
-  reqCpu: "100m"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
   pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   allDatabases: false
@@ -76,8 +86,13 @@ mysql:
 # Valores para el cronjob de backup de mongo
 mongo:
   serviceName: "mongodump"
-  reqMemory: "100Mi"
-  reqCpu: "100m"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
   pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   allDatabases: false
@@ -93,8 +108,13 @@ mongo:
 # Valores para el cronjob de backup de pgsql
 pgsql:
   serviceName: "pgdump"
-  reqMemory: "100Mi"
-  reqCpu: "100m"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
   pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   backupDatabases: "basededatos1 basededatos2 sampledb"
@@ -109,8 +129,13 @@ pgsql:
 # Valores para el cronjob de backup de redis
 redis:
   serviceName: "redisdump"
-  reqMemory: "100Mi"
-  reqCpu: "100m"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
   pvcBackupName: "backups"
   cronTime: "*/5 * * * *"
   backupStorage: "exampleapp"
@@ -126,8 +151,13 @@ redis:
 # Valores para el cronjob de backup de rsync
 rsync:
   serviceName: "rsyncdump"
-  reqMemory: "100Mi"
-  reqCpu: "100m"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
   pvcBackupName: "backups"
   pvcOriginName: "pvc-origin"
   cronTime: "*/5 * * * *"
