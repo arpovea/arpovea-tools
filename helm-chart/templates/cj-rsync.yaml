@@ -24,8 +24,11 @@ spec:
             command: ["/bin/entrypoint_rsync_dump.sh"]
             resources:
               requests:
-                cpu: {{ .Values.rsync.reqCpu }}
-                memory: {{ .Values.rsync.reqMemory }}
+                cpu: {{ .Values.rsync.resources.requests.cpu }}
+                memory: {{ .Values.rsync.resources.requests.memory }}
+              limits:
+                cpu: {{ .Values.rsync.resources.limits.cpu }}
+                memory: {{ .Values.rsync.resources.limits.memory }}
             envFrom:
             - configMapRef:
                 name: cronjob-cm-{{ .Values.rsync.serviceName }}

@@ -23,6 +23,13 @@ spec:
             imagePullPolicy: Always
             command:
             - /bin/entrypoint_minio_dump.sh
+            resources:
+              requests:
+                cpu: {{ .Values.minio.resources.requests.cpu }}
+                memory: {{ .Values.minio.resources.requests.memory }}
+              limits:
+                cpu: {{ .Values.minio.resources.limits.cpu }}
+                memory: {{ .Values.minio.resources.limits.memory }}
             envFrom:
             - configMapRef:
                 name: cronjob-cm-{{ .Values.minio.serviceName }}
