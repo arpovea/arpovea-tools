@@ -1,4 +1,4 @@
-name: Helm Lint
+name: Test de formato Helm + Push desde develop a main
 
 on:
   push:
@@ -20,3 +20,21 @@ jobs:
 
       - name: Helm Lint
         run: helm lint ./helm-chart
+
+  merge-to-main:
+    runs-on: ubuntu-latest
+    needs: helm-lint
+    if: github.ref == 'refs/heads/develop'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
+
+      - name: Merge develop into main
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git merge --no-ff origin/develop -m "Merging changes from develop to main"
+          git push origin main
+
