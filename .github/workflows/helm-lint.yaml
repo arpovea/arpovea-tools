@@ -47,6 +47,7 @@ jobs:
 
       - name: Merge main back into develop
         run: |
+          git fetch origin
           git checkout develop
           git merge --no-ff main -m "Sync develop with main, '[skip ci]'"
           git push origin develop
