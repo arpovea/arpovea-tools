@@ -36,7 +36,7 @@ FIND_MAX_DEPTH="${FIND_MAX_DEPTH:-2}"
 MIN_MAX_DEPTH="${MIN_MAX_DEPTH:-1}"
 
 # Ajuste de la ruta de almacenamiento de respaldo
-BACKUP_STORAGE="/pgdump/${BACKUP_STORAGE}"
+BACKUP_STORAGE="${BACKUP_STORAGE}"
 BACKUP_PATH="${BACKUP_STORAGE}/${DATE_BACKUP}"
 
 # Creación de directorios de respaldo
