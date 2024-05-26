@@ -1,10 +1,10 @@
 name: Test de formato Helm + Push desde develop a main
 
 on:
-  push:
-    branches:
-      - main
-      - develop
+  workflow_run:
+    workflows: ["MySQL Backup Test"]
+    types:
+      - completed
 
 jobs:
   helm-lint:
@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{secrets.GITACTIONS}}
-          fetch-depth: 0 # Fetch all history for all tags and branches
+          fetch-depth: 0
 
       - name: Configure Git
         run: |
