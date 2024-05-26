@@ -2,6 +2,8 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/arpovea/arpovea-tools/blob/main/LICENSE.md)
 ![Top Language](https://img.shields.io/github/languages/top/arpovea/arpovea-tools?label=Shell&color=red)
 ![Version](https://img.shields.io/badge/Version:-ALPHA-green)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/arpovea/arpovea-tools/helm-lint.yaml?label=TESTING)
+
 
 Bienvenidos al repositorio de **ARPOVEA-Tools**
 
@@ -29,7 +31,3 @@ Este repositorio contiene los siguientes componentes principales:
 - **/README.md** y **/LICENSE.md**: Proporcionan información general del proyecto y la licencia bajo la cual se distribuye.
 
 Cada subdirectorio está adecuadamente documentado con un `README.md` propio que explica su propósito y uso.
-
-
-
-
