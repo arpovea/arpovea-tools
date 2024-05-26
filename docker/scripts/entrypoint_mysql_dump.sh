@@ -35,8 +35,8 @@ BACKUP_PATH="${BACKUP_STORAGE}/${DATE_BACKUP}"
 echo "Preparando directorio de respaldo..."
 mkdir -p "${BACKUP_PATH}"
 
-echo -e "\nInformación del Sistema:"
-df -h | grep "mysqldump"
+#echo -e "\nInformación del Sistema:"
+#df -h | grep "mysqldump"
 
 echo -e "\nArbol de directorio de respaldo:"
 tree -L 3 -T "Backup" "${BACKUP_STORAGE}"
