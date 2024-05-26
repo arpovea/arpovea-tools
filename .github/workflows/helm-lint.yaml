@@ -42,13 +42,5 @@ jobs:
         run: |
           git fetch origin
           git checkout main
-          git merge origin/develop --no-ff -m "Merging changes from develop to main, '[skip ci]'"
+          git merge --ff-only origin/develop -m "Merging changes from develop to main, '[skip ci]'"
           git push origin main
-
-      - name: Merge main back into develop
-        run: |
-          git fetch origin
-          git checkout develop
-          git merge --no-ff main -m "Sync develop with main, '[skip ci]'"
-          git push origin develop
-
