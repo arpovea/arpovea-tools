@@ -36,7 +36,7 @@ MIN_MAX_DEPTH="${MIN_MAX_DEPTH:-1}"
 WAIT_SAVE_RDB="${WAIT_SAVE_RDB:-30}"
 
 # Ajuste de la ruta de almacenamiento de respaldo
-BACKUP_STORAGE="/redisdump/${BACKUP_STORAGE}"
+BACKUP_STORAGE="${BACKUP_STORAGE}"
 BACKUP_PATH="${BACKUP_STORAGE}/${DATE_BACKUP}"
 
 # Creación de directorios de respaldo
