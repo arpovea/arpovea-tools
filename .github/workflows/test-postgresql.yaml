@@ -43,6 +43,7 @@ jobs:
         DB_USER: dummyuser
         DB_PASS: dummypass
         DB_HOST: localhost
+        DB_DATABASE: mydatabase
         ALL_DATABASES: "true"
         BACKUP_STORAGE: "/tmp/pgdump"
       run: |
