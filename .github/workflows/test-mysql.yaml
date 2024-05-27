@@ -6,9 +6,8 @@ on:
       - develop
 
 jobs:
-  test:
+  test-dump-mysql:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
     services:
       mysql:

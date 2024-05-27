@@ -2,7 +2,7 @@ name: Test de formato Helm + Push desde develop a main
 
 on:
   workflow_run:
-    workflows: ["MySQL Backup Test"]
+    workflows: ["MySQL Backup Test", "PostgreSQL Backup Test"]
     types:
       - completed
 
@@ -42,5 +42,5 @@ jobs:
         run: |
           git fetch origin
           git checkout main
-          git merge --ff-only origin/develop -m "Merging changes from develop to main, '[skip ci]'"
+          git merge --ff-only origin/develop -m "Merging changes from develop to main"
           git push origin main
