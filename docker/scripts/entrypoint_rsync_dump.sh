@@ -37,8 +37,8 @@ BACKUP_PATH="${BACKUP_STORAGE}/${DATE_BACKUP}"
 # Crear directorio de backup si no existe
 mkdir -p "${BACKUP_STORAGE}"
 
-echo "Información del Sistema:"
-df -h | grep "rsyncdump\|rsyncori"
+#echo "Información del Sistema:"
+#df -h | grep "rsyncdump\|rsyncori"
 
 tree -L 3 -T "Origen" "/rsyncori"
 echo -e "\n"
