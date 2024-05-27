@@ -13,7 +13,7 @@ jobs:
 
     services:
       mongodb:
-        image: mongo:7.0.9
+        image: mongo:7.0
         env:
           MONGO_INITDB_ROOT_USERNAME: dummyuser
           MONGO_INITDB_ROOT_PASSWORD: dummypass
