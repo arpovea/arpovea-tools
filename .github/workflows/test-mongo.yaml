@@ -1,0 +1,49 @@
+name: MongoDB Backup Test
+
+on:
+  workflow_run:
+    workflows: ["MySQL Backup Test"]
+    types:
+      - completed
+
+jobs:
+  test-dump-mongodb:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.head_branch == 'develop' }}
+
+    services:
+      mongodb:
+        image: mongo:7.0.9
+        env:
+          MONGO_INITDB_ROOT_USERNAME: dummyuser
+          MONGO_INITDB_ROOT_PASSWORD: dummypass
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongo --eval 'db.runCommand({ping: 1})'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Wait for MongoDB
+      run: |
+        until mongo --username dummyuser --password dummypass --eval "db.adminCommand('ping')" > /dev/null; do
+          echo "Waiting for MongoDB to become ready..."
+          sleep 2
+        done
+        echo "MongoDB is ready."
+
+    - name: Run Backup Script
+      env:
+        DB_USER: dummyuser
+        DB_PASS: dummypass
+        DB_HOST: 127.0.1.1
+        BACKUP_STORAGE: "/tmp/mongodump"
+      run: |
+        mkdir -p $BACKUP_STORAGE
+        chmod +x ./docker/scripts/entrypoint_mongo_dump.sh
+        ./docker/scripts/entrypoint_mongo_dump.sh
