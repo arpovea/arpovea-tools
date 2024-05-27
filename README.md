@@ -31,3 +31,5 @@ Este repositorio contiene los siguientes componentes principales:
 - **/README.md** y **/LICENSE.md**: Proporcionan información general del proyecto y la licencia bajo la cual se distribuye.
 
 Cada subdirectorio está adecuadamente documentado con un `README.md` propio que explica su propósito y uso.
+
+
