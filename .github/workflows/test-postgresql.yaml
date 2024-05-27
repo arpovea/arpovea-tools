@@ -17,7 +17,7 @@ jobs:
         env:
           POSTGRES_USER: dummyuser
           POSTGRES_PASSWORD: dummypass
-          POSTGRES_DB: testdb
+          POSTGRES_DB: mydatabase
         ports:
           - 5432:5432
         options: >-
@@ -43,7 +43,6 @@ jobs:
         DB_USER: dummyuser
         DB_PASS: dummypass
         DB_HOST: localhost
-        DB_DATABASE: mydatabase
         ALL_DATABASES: "true"
         BACKUP_STORAGE: "/tmp/pgdump"
       run: |
