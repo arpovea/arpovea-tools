@@ -17,6 +17,7 @@ jobs:
         env:
           MONGO_INITDB_ROOT_USERNAME: dummyuser
           MONGO_INITDB_ROOT_PASSWORD: dummypass
+          MONGO_INITDB_DATABASE:  dummymongo
         ports:
           - 27017:27017
         options: >-
