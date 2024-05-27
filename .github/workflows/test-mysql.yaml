@@ -44,4 +44,3 @@ jobs:
         mkdir -p $BACKUP_STORAGE
         chmod +x ./docker/scripts/entrypoint_mysql_dump.sh
         ./docker/scripts/entrypoint_mysql_dump.sh
-
