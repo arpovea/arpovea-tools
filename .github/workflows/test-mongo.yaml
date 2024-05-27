@@ -2,7 +2,7 @@ name: MongoDB Backup Test
 
 on:
   workflow_run:
-    workflows: ["MySQL Backup Test"]
+    workflows: ["PostgreSQL Backup Test"]
     types:
       - completed
 
