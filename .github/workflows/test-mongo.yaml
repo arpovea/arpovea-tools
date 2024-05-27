@@ -42,6 +42,7 @@ jobs:
         DB_USER: dummyuser
         DB_PASS: dummypass
         DB_HOST: 127.0.1.1
+        ALL_DATABASES: "true"
         BACKUP_STORAGE: "/tmp/mongodump"
       run: |
         mkdir -p $BACKUP_STORAGE
