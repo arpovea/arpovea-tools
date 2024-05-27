@@ -51,12 +51,4 @@ jobs:
         ./docker/scripts/entrypoint_postgresql_dump.sh
 
     - name: Check Results
-      run: |
-        ls -lah $BACKUP_STORAGE
-        cat $BACKUP_STORAGE/checksums.txt
-
-    - name: Cleanup
-      if: always()
-      run: |
-        echo "Cleaning up..."
-        rm -rf $BACKUP_STORAGE
+      run: ls -lah $BACKUP_STORAGE
