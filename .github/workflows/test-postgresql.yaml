@@ -49,6 +49,3 @@ jobs:
         mkdir -p $BACKUP_STORAGE
         chmod +x ./docker/scripts/entrypoint_postgresql_dump.sh
         ./docker/scripts/entrypoint_postgresql_dump.sh
-
-    - name: Check Results
-      run: ls -lah $BACKUP_STORAGE

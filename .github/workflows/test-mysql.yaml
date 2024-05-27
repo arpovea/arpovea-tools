@@ -45,5 +45,3 @@ jobs:
         chmod +x ./docker/scripts/entrypoint_mysql_dump.sh
         ./docker/scripts/entrypoint_mysql_dump.sh
 
-    - name: Check Results
-      run: ls -lah $BACKUP_STORAGE
