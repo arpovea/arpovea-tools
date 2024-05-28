@@ -20,12 +20,7 @@ jobs:
           MONGO_INITDB_DATABASE:  dummymongo
         ports:
           - 27017:27017
-        options: >-
-          --health-cmd="mongo --eval 'db.runCommand({ping: 1})' --host 127.0.0.1 --username dummyuser --password dummypass"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
+          
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
