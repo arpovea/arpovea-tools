@@ -25,9 +25,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Wait for MongoDB
+    - name: Check MongoDB Availability
       run: |
-        until mongo --username dummyuser --password dummypass --eval "db.adminCommand('ping')" > /dev/null; do
+        until mongosh --username dummyuser --password dummypass --eval "db.adminCommand('ping')" > /dev/null; do
           echo "Waiting for MongoDB to become ready..."
           sleep 2
         done
