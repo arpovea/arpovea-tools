@@ -2,7 +2,7 @@ name: Test de formato Helm + Push desde develop a main
 
 on:
   workflow_run:
-    workflows: ["Redis Backup Test"]
+    workflows: ["MongoDB Backup Test"]
     types:
       - completed
 

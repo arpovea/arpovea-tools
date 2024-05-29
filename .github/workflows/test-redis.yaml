@@ -2,7 +2,7 @@ name: Redis Backup Test
 
 on:
   workflow_run:
-    workflows: ["MongoDB Backup Test"]
+    workflows: ["PostgreSQL Backup Test"]
     types:
       - completed
 
