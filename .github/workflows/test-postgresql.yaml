@@ -38,7 +38,7 @@ jobs:
         done
         echo "PostgreSQL is ready."
 
-    - name: Run Backup Script
+    - name: Run PostgreSQL Backup Script
       env:
         DB_USER: dummyuser
         DB_PASS: dummypass

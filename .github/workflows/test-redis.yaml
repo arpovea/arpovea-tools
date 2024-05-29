@@ -35,7 +35,7 @@ jobs:
         done
         echo "Redis is ready."
 
-    - name: Execute Redis Backup Script
+    - name: Run Redis Backup Script
       env:
         DB_PASS: dummypass
         DB_HOST: 127.0.0.1

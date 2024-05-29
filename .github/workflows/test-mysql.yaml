@@ -33,7 +33,7 @@ jobs:
           sleep 1
         done
 
-    - name: Run Backup Script
+    - name: Run MySQL Backup Script
       env:
         DB_USER: root
         DB_PASS: dummypass
