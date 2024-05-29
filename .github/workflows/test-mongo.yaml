@@ -32,6 +32,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y mongodb-mongosh
 
+    - name: Install MongoDB Tools
+      run: |
+        wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+        echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+        sudo apt-get update
+        sudo apt-get install -y mongodb-org-tools
+
     - name: Check MongoDB Availability
       run: |
         until mongosh --username dummyuser --password dummypass --eval "db.adminCommand('ping')" > /dev/null; do
