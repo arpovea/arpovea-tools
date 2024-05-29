@@ -1,0 +1,182 @@
+name: Script Test
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  test-dump-mysql:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: dummypass
+          MYSQL_DATABASE: testdb
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pdummypass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Wait for MySQL
+      run: |
+        while ! mysqladmin ping -h"127.0.0.1" -pdummypass --silent; do
+          sleep 1
+        done
+
+    - name: Run MySQL Backup Script
+      env:
+        DB_USER: root
+        DB_PASS: dummypass
+        DB_HOST: 127.0.0.1
+        ALL_DATABASES: "true"
+        BACKUP_STORAGE: "/tmp/mysqldump"
+      run: |
+        mkdir -p $BACKUP_STORAGE
+        chmod +x ./docker/scripts/entrypoint_mysql_dump.sh
+        ./docker/scripts/entrypoint_mysql_dump.sh
+
+  test-dump-postgresql:
+    needs: test-dump-mysql
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: dummyuser
+          POSTGRES_PASSWORD: dummypass
+          POSTGRES_DB: mydatabase
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U dummyuser"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Wait for PostgreSQL
+      run: |
+        until pg_isready -h localhost -p 5432 -U dummyuser; do
+          echo "Waiting for PostgreSQL to become ready..."
+          sleep 2
+        done
+        echo "PostgreSQL is ready."
+
+    - name: Run PostgreSQL Backup Script
+      env:
+        DB_USER: dummyuser
+        DB_PASS: dummypass
+        DB_HOST: 127.0.1.1
+        ALL_DATABASES: "true"
+        BACKUP_STORAGE: "/tmp/pgdump"
+      run: |
+        mkdir -p $BACKUP_STORAGE
+        chmod +x ./docker/scripts/entrypoint_postgresql_dump.sh
+        ./docker/scripts/entrypoint_postgresql_dump.sh
+
+  test-dump-mongodb:
+    needs: test-dump-postgresql
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    services:
+      mongodb:
+        image: mongo:7.0
+        env:
+          MONGO_INITDB_ROOT_USERNAME: dummyuser
+          MONGO_INITDB_ROOT_PASSWORD: dummypass
+          MONGO_INITDB_DATABASE:  dummymongo
+        ports:
+          - 27017:27017
+          
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install MongoDB Shell (mongosh)
+      run: |
+        wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+        echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+        sudo apt-get update
+        sudo apt-get install -y mongodb-mongosh
+
+    - name: Install MongoDB Tools
+      run: |
+        wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+        echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+        sudo apt-get update
+        sudo apt-get install -y mongodb-org-tools
+
+    - name: Check MongoDB Availability
+      run: |
+        until mongosh --username dummyuser --password dummypass --eval "db.adminCommand('ping')" > /dev/null; do
+          echo "Waiting for MongoDB to become ready..."
+          sleep 2
+        done
+        echo "MongoDB is ready."
+
+    - name: Run MongoDB Backup Script
+      env:
+        DB_USER: dummyuser
+        DB_PASS: dummypass
+        DB_HOST: 127.0.1.1
+        ALL_DATABASES: "true"
+        BACKUP_STORAGE: "/tmp/mongodump"
+      run: |
+        mkdir -p $BACKUP_STORAGE
+        chmod +x ./docker/scripts/entrypoint_mongo_dump.sh
+        ./docker/scripts/entrypoint_mongo_dump.sh
+
+  test-dump-redis:
+    needs: test-dump-mongodb
+    runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis:7.2
+        env:
+          REDIS_PASSWORD: dummypass
+        ports:
+          - 6379:6379
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Install Redis tools
+      run: sudo apt-get update && sudo apt-get install redis-tools -y
+
+    - name: Wait for Redis to be ready
+      run: |
+        echo "Waiting for Redis..."
+        until redis-cli -h 127.0.0.1 -p 6379 -a dummypass ping; do
+          printf '.'
+          sleep 1
+        done
+        echo "Redis is ready."
+
+    - name: Run Redis Backup Script
+      env:
+        DB_PASS: dummypass
+        DB_HOST: 127.0.0.1
+        DB_PORT: 6379
+        RDB_FILE: dump.rdb
+        BACKUP_STORAGE: /tmp/redisdump
+        WAIT_SAVE_RDB: 30
+      run: |
+        mkdir -p $BACKUP_STORAGE
+        chmod +x ./docker/scripts/entrypoint_redis_dump.sh
+        ./docker/scripts/entrypoint_redis_dump.sh
