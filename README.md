@@ -2,7 +2,10 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/arpovea/arpovea-tools/blob/main/LICENSE.md)
 ![Top Language](https://img.shields.io/github/languages/top/arpovea/arpovea-tools?label=Shell&color=red)
 ![Version](https://img.shields.io/badge/Version:-ALPHA-green)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/arpovea/arpovea-tools/helm-lint.yaml?label=TESTING)
+![GitHub Actions Workflow Status Helm lint](https://img.shields.io/github/actions/workflow/status/arpovea/arpovea-tools/helm-lint.yaml?label=Helm)
+![GitHub Actions Workflow Status Test MySQL](https://img.shields.io/github/actions/workflow/status/arpovea/arpovea-tools/test-mysql.yaml?label=Test%20MySQL)
+![GitHub Actions Workflow Status Test PostgreSQL](https://img.shields.io/github/actions/workflow/status/arpovea/arpovea-tools/test-postgresql.yaml?label=Test%20PostgreSQL)
+![GitHub Actions Workflow Status Test MongoDB](https://img.shields.io/github/actions/workflow/status/arpovea/arpovea-tools/test-mongo.yaml?label=Test%20MongoDB)
 
 
 Bienvenidos al repositorio de **ARPOVEA-Tools**
