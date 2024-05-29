@@ -90,7 +90,6 @@ jobs:
   test-dump-mongodb:
     needs: test-dump-postgresql
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     services:
       mongodb:
