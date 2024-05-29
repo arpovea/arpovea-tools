@@ -1,0 +1,46 @@
+name: Redis Backup Test
+
+on:
+  workflow_run:
+    workflows: ["MongoDB Backup Test"]
+    types:
+      - completed
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    services:
+      redis:
+        image: redis:7.2
+        env:
+          REDIS_PASSWORD: dummypass
+        ports:
+          - 6379:6379
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Wait for Redis to be ready
+      run: |
+        echo "Waiting for Redis..."
+        until redis-cli -h 127.0.0.1 -p 6379 -a dummypass ping; do
+          printf '.'
+          sleep 1
+        done
+        echo "Redis is ready."
+
+    - name: Execute Redis Backup Script
+      env:
+        DB_PASS: dummypass
+        DB_HOST: 127.0.0.1
+        DB_PORT: 6379
+        RDB_FILE: dump.rdb
+        BACKUP_STORAGE: /tmp/redisdump
+        WAIT_SAVE_RDB: 30
+      run: |
+        mkdir -p $BACKUP_STORAGE
+        chmod +x ./docker/scripts/entrypoint_redis_dump.sh
+        ./docker/scripts/entrypoint_redis_dump.sh
