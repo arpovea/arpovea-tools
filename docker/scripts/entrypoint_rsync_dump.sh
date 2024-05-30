@@ -24,7 +24,7 @@ echo "Iniciando backup RSYNC..."
 : "${BACKUP_STORAGE:?Variable BACKUP_STORAGE no definida}"
 : "${ORIGIN_VOLUME:?Variable ORIGIN_VOLUME no definida}"
 
-BACKUP_STORAGE_PREFIX="/rsyncdump"
+#BACKUP_STORAGE_PREFIX="/rsyncdump"
 DATE_BACKUP=$(date +%Y%m%d%H%M)
 DELETE_OLD_BACKUPS=${DELETE_OLD_BACKUPS:-false}
 MAX_BACKUP_DAYS=${MAX_BACKUP_DAYS:-7}
