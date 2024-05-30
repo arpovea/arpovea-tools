@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - "./docker/scripts/**"
 
 jobs:
   test-dump-mysql:
