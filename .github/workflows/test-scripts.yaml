@@ -227,7 +227,7 @@ jobs:
       run: |
         wget https://dl.min.io/client/mc/release/linux-amd64/mc
         chmod +x mc
-        ./mc alias set minio http://localhost:9000 dummyuser dummypass
+        ./mc alias set minio http://127.0.0.1:9000 dummyuser dummypass
         ./mc mb minio/mybucket
         echo "Hello, MinIO!" | ./mc pipe minio/mybucket/hello.txt
 
@@ -241,5 +241,5 @@ jobs:
         DELETE_OLD_BACKUPS: "true"
         MAX_BACKUP_DAYS: 7
       run: |
-        chmod +x ./path/to/your/script/entrypoint_minio_backup.sh
-        ./path/to/your/script/entrypoint_minio_backup.sh
+        chmod +x ./docker/scripts/entrypoint_minio_dump.sh
+        ./docker/scripts/entrypoint_minio_dump.sh
