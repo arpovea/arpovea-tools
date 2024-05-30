@@ -213,15 +213,19 @@ jobs:
         env:
           MINIO_ROOT_USER: dummyuser
           MINIO_ROOT_PASSWORD: dummypass
-        options: >-
-          --health-cmd="curl -f http://127.0.0.1:9000/minio/health/live"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    - name: Wait for MinIO to be ready
+      run: |
+        echo "Waiting for MinIO..."
+        until curl -s --fail http://127.0.0.1:9000/minio/health/live; do
+          printf '.'
+          sleep 1
+        done
+        echo "MinIO is ready."
 
     - name: Install MinIO Client
       run: |
