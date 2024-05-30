@@ -186,8 +186,8 @@ jobs:
 
     - name: Prepare environment
       run: |
-        mkdir -p /rsyncori
-        echo "Simulando datos..." > /rsyncori/sample_data.txt
+        mkdir -p /tmp/rsyncori
+        echo "Simulando datos..." > /tmp/rsyncori/sample_data.txt
 
     - name: Install rsync and dependencies
       run: sudo apt-get update && sudo apt-get install rsync tree -y
@@ -195,7 +195,7 @@ jobs:
     - name: Run Rsync Backup Script
       env:
         BACKUP_STORAGE: "/tmp/rsyncdump"
-        ORIGIN_VOLUME: "/rsyncori"
+        ORIGIN_VOLUME: "/tmp/rsyncori"
         DELETE_OLD_BACKUPS: "true"
         MAX_BACKUP_DAYS: 7
       run: |
