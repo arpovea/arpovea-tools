@@ -214,7 +214,10 @@ jobs:
           MINIO_ROOT_USER: dummyuser
           MINIO_ROOT_PASSWORD: dummypass
         options: >-
-          server /data
+          --health-cmd="curl -f http://127.0.0.1:9000/minio/health/live"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
     - name: Checkout repository
@@ -230,7 +233,7 @@ jobs:
 
     - name: Run MinIO Backup Script
       env:
-        ENDPOINT: http://localhost:9000
+        ENDPOINT: http://127.0.0.1:9000
         USERMINIO: dummyuser
         PASSWORDMINIO: dummypass
         PATH_BACKUP: /tmp/miniodump
