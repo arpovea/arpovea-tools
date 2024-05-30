@@ -40,7 +40,7 @@ mkdir -p "${BACKUP_STORAGE}"
 #echo "Información del Sistema:"
 #df -h | grep "rsyncdump\|rsyncori"
 
-tree -L 3 -T "Origen" "/rsyncori"
+tree -L 3 -T "Origen" "${ORIGIN_VOLUME}"
 echo -e "\n"
 tree -L 3 -T "Backup" "${BACKUP_STORAGE}"
 
