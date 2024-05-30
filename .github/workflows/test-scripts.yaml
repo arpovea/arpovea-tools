@@ -213,7 +213,8 @@ jobs:
         env:
           MINIO_ROOT_USER: dummyuser
           MINIO_ROOT_PASSWORD: dummypass
-        args: server /data
+        options: >-
+          server /data
 
     steps:
     - name: Checkout repository
