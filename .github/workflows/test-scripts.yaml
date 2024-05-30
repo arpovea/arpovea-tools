@@ -202,3 +202,40 @@ jobs:
         chmod +x ./docker/scripts/entrypoint_rsync_dump.sh
         ./docker/scripts/entrypoint_rsync_dump.sh
 
+  test-backup-minio:
+    runs-on: ubuntu-latest
+
+    services:
+      minio:
+        image: minio/minio
+        ports:
+          - 9000:9000
+        env:
+          MINIO_ROOT_USER: dummyuser
+          MINIO_ROOT_PASSWORD: dummypass
+        args: server /data
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install MinIO Client
+      run: |
+        wget https://dl.min.io/client/mc/release/linux-amd64/mc
+        chmod +x mc
+        ./mc alias set minio http://localhost:9000 dummyuser dummypass
+        ./mc mb minio/mybucket
+        echo "Hello, MinIO!" | ./mc pipe minio/mybucket/hello.txt
+
+    - name: Run MinIO Backup Script
+      env:
+        ENDPOINT: http://localhost:9000
+        USERMINIO: dummyuser
+        PASSWORDMINIO: dummypass
+        PATH_BACKUP: /tmp/miniodump
+        PATH_COMPRESS: s3minio
+        DELETE_OLD_BACKUPS: "true"
+        MAX_BACKUP_DAYS: 7
+      run: |
+        chmod +x ./path/to/your/script/entrypoint_minio_backup.sh
+        ./path/to/your/script/entrypoint_minio_backup.sh
