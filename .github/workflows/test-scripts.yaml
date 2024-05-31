@@ -218,14 +218,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Install MinIO Client
-      run: |
-        wget https://dl.min.io/client/mc/release/linux-amd64/mc
-        chmod +x mc
-        ./mc alias set minio http://127.0.0.1:9000 dummyuser dummypass
-        ./mc mb minio/mybucket
-        echo "Hello, MinIO!" | ./mc pipe minio/mybucket/hello.txt
-
     - name: Wait for MinIO to be ready
       run: |
         echo "Waiting for MinIO..."
@@ -234,6 +226,14 @@ jobs:
           sleep 1
         done
         echo "MinIO is ready.
+
+    - name: Install MinIO Client
+      run: |
+        wget https://dl.min.io/client/mc/release/linux-amd64/mc
+        chmod +x mc
+        ./mc alias set minio http://127.0.0.1:9000 dummyuser dummypass
+        ./mc mb minio/mybucket
+        echo "Hello, MinIO!" | ./mc pipe minio/mybucket/hello.txt
 
     - name: Run MinIO Backup Script
       env:
