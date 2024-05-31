@@ -207,12 +207,13 @@ jobs:
 
     services:
       minio:
-        image: minio/minio
-        ports:
-          - 9000:9000
+        image: minio/minio:edge-cicd
         env:
           MINIO_ROOT_USER: dummyuser
           MINIO_ROOT_PASSWORD: dummypass
+        ports:
+          - 9000:9000
+        options: --health-cmd "curl -s http://127.0.0.1:9000/minio/health/live"
 
     steps:
     - name: Checkout repository
