@@ -226,6 +226,15 @@ jobs:
         ./mc mb minio/mybucket
         echo "Hello, MinIO!" | ./mc pipe minio/mybucket/hello.txt
 
+    - name: Wait for MinIO to be ready
+      run: |
+        echo "Waiting for MinIO..."
+        until curl -s --fail http://127.0.0.1:9000/minio/health/live; do
+          printf '.'
+          sleep 1
+        done
+        echo "MinIO is ready.
+
     - name: Run MinIO Backup Script
       env:
         ENDPOINT: http://127.0.0.1:9000
