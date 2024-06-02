@@ -69,6 +69,88 @@ Para eliminar el despliegue, utiliza:
 helm uninstall my-backup
 ```
 
+## Parameters
+
+### General Parameters
+
+| Parameter                   | Description                                   | Default                  |
+|-----------------------------|-----------------------------------------------|--------------------------|
+| `global.serviceSelector`    | Servicios para activar.                       | `See values.yaml`        |
+| `global.registry`           | Registro Docker para imágenes.                | `"docker.io"`            |
+| `global.image`              | Imagen del contenedor.                        | `"arpovea/arpovea-tools"`|
+| `global.imageTag`           | Etiqueta de la imagen.                        | `"1.0"`                  |
+| `openshift.createBuildConfig` | Si se debe crear un BuildConfig en OpenShift | `false`                  |
+
+### Testing Parameters
+
+| Parameter                   | Description                                   | Default                  |
+|-----------------------------|-----------------------------------------------|--------------------------|
+| `testing.serviceName`       | Nombre del servicio de pruebas.               | `"testing-service"`      |
+| `testing.replicas`          | Número de replicas para el servicio de pruebas| `1`                      |
+| `testing.image.pullPolicy`  | Política de obtención de la imagen.           | `"IfNotPresent"`         |
+| `testing.resources`         | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
+
+### MinIO Backup Parameters
+
+| Parameter                   | Description                                   | Default                  |
+|-----------------------------|-----------------------------------------------|--------------------------|
+| `minio.serviceName`         | Nombre del servicio para el cronjob de MinIO. | `"miniodump"`            |
+| `minio.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
+| `minio.endpoint`            | Endpoint para el servicio MinIO.              | `"http://minio.minio:9000"` |
+| `minio.existingSecret`      | Secret existente para credenciales.           | `""`                     |
+| `minio.cronTime`            | Cronograma para el job de backup.             | `"0 3 * * *"`            |
+
+### MySQL Backup Parameters
+
+| Parameter                   | Description                                   | Default                  |
+|-----------------------------|-----------------------------------------------|--------------------------|
+| `mysql.serviceName`         | Nombre del servicio para el cronjob de MySQL. | `"mysqldump"`            |
+| `mysql.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
+| `mysql.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
+| `mysql.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
+| `mysql.allDatabases`        | Si se deben respaldar todas las bases de datos| `false`                  |
+
+### MongoDB Backup Parameters
+
+| Parameter                   | Description                                   | Default                  |
+|-----------------------------|-----------------------------------------------|--------------------------|
+| `mongo.serviceName`         | Nombre del servicio para el cronjob de Mongo. | `"mongodump"`            |
+| `mongo.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
+| `mongo.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
+| `mongo.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
+| `mongo.allDatabases`        | Si se deben respaldar todas las bases de datos| `false`                  |
+
+### PostgreSQL Backup Parameters
+
+| Parameter                   | Description                                   | Default                  |
+|-----------------------------|-----------------------------------------------|--------------------------|
+| `pgsql.serviceName`         | Nombre del servicio para el cronjob de PostgreSQL.| `"pgdump"`           |
+| `pgsql.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
+| `pgsql.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
+| `pgsql.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
+| `pgsql.backupDatabases`     | Bases de datos específicas para respaldar.    | `See values.yaml`        |
+
+### Redis Backup Parameters
+
+| Parameter                   | Description                                   | Default                  |
+|-----------------------------|-----------------------------------------------|--------------------------|
+| `redis.serviceName`         | Nombre del servicio para el cronjob de Redis. | `"redisdump"`            |
+| `redis.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
+| `redis.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
+| `redis.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
+| `redis.backupStorage`       | Espacio de almacenamiento para el backup.     | `"exampleapp"`           |
+
+### Rsync Backup Parameters
+
+| Parameter                   | Description                                   | Default                  |
+|-----------------------------|-----------------------------------------------|--------------------------|
+| `rsync.serviceName`         | Nombre del servicio para el cronjob de Rsync. | `"rsyncdump"`            |
+| `rsync.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
+| `rsync.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
+| `rsync.pvcOriginName`       | Nombre del PVC de origen para los datos.      | `"pvc-origin"`           |
+| `rsync.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
+
+
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - ver el archivo `LICENSE.md` para más detalles.
