@@ -92,13 +92,26 @@ helm uninstall my-backup
 
 ### MinIO Backup Parameters
 
-| Parameter                   | Description                                   | Default                  |
-|-----------------------------|-----------------------------------------------|--------------------------|
-| `minio.serviceName`         | Nombre del servicio para el cronjob de MinIO. | `"miniodump"`            |
-| `minio.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
-| `minio.endpoint`            | Endpoint para el servicio MinIO.              | `"http://minio.minio:9000"` |
-| `minio.existingSecret`      | Secret existente para credenciales.           | `""`                     |
-| `minio.cronTime`            | Cronograma para el job de backup.             | `"0 3 * * *"`            |
+### MinIO Backup Parameters
+
+| Parameter                         | Description                                                  | Default               |
+|-----------------------------------|--------------------------------------------------------------|-----------------------|
+| `minio.serviceName`               | Nombre del servicio para el cronjob de MinIO.                | `miniodump`           |
+| `minio.resources.requests.cpu`    | CPU solicitada para el cronjob de MinIO.                     | `100m`                |
+| `minio.resources.requests.memory` | Memoria solicitada para el cronjob de MinIO.                 | `128Mi`               |
+| `minio.resources.limits.cpu`      | Límite de CPU para el cronjob de MinIO.                      | `200m`                |
+| `minio.resources.limits.memory`   | Límite de memoria para el cronjob de MinIO.                  | `256Mi`               |
+| `minio.endpoint`                  | Endpoint para acceder a MinIO.                               | `http://minio.minio:9000` |
+| `minio.existingSecret`            | Nombre del secret existente que contiene las credenciales.   | `""`                  |
+| `minio.user`                      | Usuario de MinIO utilizado para autenticación.               | `defaultUser`         |
+| `minio.password`                  | Contraseña de MinIO utilizada para autenticación.            | `defaultPassword`     |
+| `minio.pvcBackupName`             | Nombre del PVC donde se almacenan los backups.               | `backups`             |
+| `minio.cronTime`                  | Cronograma para la ejecución del cronjob.                    | `0 3 * * *`           |
+| `minio.pathBackup`                | Ruta en el PVC donde se almacenan los backups.               | `/miniodump`          |
+| `minio.pathCompress`              | Ruta relativa donde se almacenan temporalmente los archivos antes de comprimir. | `s3minio` |
+| `minio.deleteOldBackups`          | Si se deben eliminar los backups antiguos.                   | `false`               |
+| `minio.maxBackupDays`             | Número de días después de los cuales los backups antiguos deben ser eliminados. | `7`                   |
+
 
 ### MySQL Backup Parameters
 
