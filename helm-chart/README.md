@@ -195,14 +195,19 @@ helm uninstall my-backup
 
 ### Rsync Backup Parameters
 
-| Parameter                   | Description                                   | Default                  |
-|-----------------------------|-----------------------------------------------|--------------------------|
-| `rsync.serviceName`         | Nombre del servicio para el cronjob de Rsync. | `"rsyncdump"`            |
-| `rsync.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
-| `rsync.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
-| `rsync.pvcOriginName`       | Nombre del PVC de origen para los datos.      | `"pvc-origin"`           |
-| `rsync.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
-
+| Parameter                          | Description                                                         | Default                  |
+|------------------------------------|---------------------------------------------------------------------|--------------------------|
+| `rsync.serviceName`                | Nombre del servicio para el cronjob de Rsync.                       | `rsyncdump`              |
+| `rsync.resources.requests.cpu`     | CPU solicitada para el cronjob de Rsync.                            | `100m`                   |
+| `rsync.resources.requests.memory`  | Memoria solicitada para el cronjob de Rsync.                        | `128Mi`                  |
+| `rsync.resources.limits.cpu`       | Límite de CPU para el cronjob de Rsync.                             | `200m`                   |
+| `rsync.resources.limits.memory`    | Límite de memoria para el cronjob de Rsync.                         | `256Mi`                  |
+| `rsync.pvcBackupName`              | Nombre del PVC donde se almacenan los backups de Rsync.             | `backups`                |
+| `rsync.pvcOriginName`              | Nombre del PVC de origen de datos para Rsync.                       | `pvc-origin`             |
+| `rsync.cronTime`                   | Cronograma para la ejecución del cronjob.                           | `*/5 * * * *`            |
+| `rsync.backupStorage`              | Ubicación de almacenamiento de los backups de Rsync.                | `exampleapp1`            |
+| `rsync.deleteOldBackups`           | Si se deben eliminar los backups antiguos de Rsync.                 | `false`                  |
+| `rsync.maxBackupDays`              | Número de días después de los cuales los backups antiguos deben ser eliminados. | `7`       |
 
 ## Licencia
 
