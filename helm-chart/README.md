@@ -133,13 +133,24 @@ helm uninstall my-backup
 
 ### MongoDB Backup Parameters
 
-| Parameter                   | Description                                   | Default                  |
-|-----------------------------|-----------------------------------------------|--------------------------|
-| `mongo.serviceName`         | Nombre del servicio para el cronjob de Mongo. | `"mongodump"`            |
-| `mongo.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
-| `mongo.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
-| `mongo.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
-| `mongo.allDatabases`        | Si se deben respaldar todas las bases de datos| `false`                  |
+| Parameter                          | Description                                                      | Default                    |
+|------------------------------------|------------------------------------------------------------------|----------------------------|
+| `mongo.serviceName`                | Nombre del servicio para el cronjob de MongoDB.                  | `mongodump`                |
+| `mongo.resources.requests.cpu`     | CPU solicitada para el cronjob de MongoDB.                       | `100m`                     |
+| `mongo.resources.requests.memory`  | Memoria solicitada para el cronjob de MongoDB.                   | `128Mi`                    |
+| `mongo.resources.limits.cpu`       | Límite de CPU para el cronjob de MongoDB.                        | `200m`                     |
+| `mongo.resources.limits.memory`    | Límite de memoria para el cronjob de MongoDB.                    | `256Mi`                    |
+| `mongo.pvcBackupName`              | Nombre del PVC donde se almacenan los backups de MongoDB.        | `backups`                  |
+| `mongo.cronTime`                   | Cronograma para la ejecución del cronjob.                        | `*/5 * * * *`              |
+| `mongo.allDatabases`               | Si se debe hacer backup de todas las bases de datos MongoDB.     | `false`                    |
+| `mongo.backupDatabases`            | Lista de bases de datos específicas de MongoDB para hacer backup.| `"basededatos1 basededatos2 sampledb"` |
+| `mongo.backupStorage`              | Ubicación de almacenamiento de los backups de MongoDB.           | `"exampleapp1"`            |
+| `mongo.existingSecret`             | Nombre del secret existente que contiene las credenciales de MongoDB. | `""`                  |
+| `mongo.dbHost`                     | Host de la base de datos MongoDB.                                | `"mongodb"`                |
+| `mongo.dbUser`                     | Usuario de la base de datos MongoDB.                             | `"admin"`                  |
+| `mongo.dbPass`                     | Contraseña de la base de datos MongoDB.                          | `"xxxxxxxxxxx"`            |
+| `mongo.deleteOldBackups`           | Si se deben eliminar los backups antiguos de MongoDB.            | `false`                    |
+| `mongo.maxBackupDays`              | Número de días después de los cuales los backups antiguos deben ser eliminados. | `7` |
 
 ### PostgreSQL Backup Parameters
 
