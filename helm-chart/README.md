@@ -92,8 +92,6 @@ helm uninstall my-backup
 
 ### MinIO Backup Parameters
 
-### MinIO Backup Parameters
-
 | Parameter                         | Description                                                  | Default               |
 |-----------------------------------|--------------------------------------------------------------|-----------------------|
 | `minio.serviceName`               | Nombre del servicio para el cronjob de MinIO.                | `miniodump`           |
@@ -112,16 +110,26 @@ helm uninstall my-backup
 | `minio.deleteOldBackups`          | Si se deben eliminar los backups antiguos.                   | `false`               |
 | `minio.maxBackupDays`             | Número de días después de los cuales los backups antiguos deben ser eliminados. | `7`                   |
 
-
 ### MySQL Backup Parameters
 
-| Parameter                   | Description                                   | Default                  |
-|-----------------------------|-----------------------------------------------|--------------------------|
-| `mysql.serviceName`         | Nombre del servicio para el cronjob de MySQL. | `"mysqldump"`            |
-| `mysql.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
-| `mysql.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
-| `mysql.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
-| `mysql.allDatabases`        | Si se deben respaldar todas las bases de datos| `false`                  |
+| Parameter                      | Description                                                      | Default                     |
+|--------------------------------|------------------------------------------------------------------|-----------------------------|
+| `mysql.serviceName`            | Nombre del servicio para el cronjob de MySQL.                    | `mysqldump`                 |
+| `mysql.resources.requests.cpu` | CPU solicitada para el cronjob de MySQL.                         | `100m`                      |
+| `mysql.resources.requests.memory` | Memoria solicitada para el cronjob de MySQL.                   | `128Mi`                     |
+| `mysql.resources.limits.cpu`   | Límite de CPU para el cronjob de MySQL.                          | `200m`                      |
+| `mysql.resources.limits.memory` | Límite de memoria para el cronjob de MySQL.                     | `256Mi`                     |
+| `mysql.pvcBackupName`          | Nombre del PVC donde se almacenan los backups.                   | `backups`                   |
+| `mysql.cronTime`               | Cronograma para la ejecución del cronjob.                        | `*/5 * * * *`               |
+| `mysql.allDatabases`           | Si se debe hacer backup de todas las bases de datos.             | `false`                     |
+| `mysql.backupDatabases`        | Lista de bases de datos específicas para hacer backup.           | `"basededatos1 basededatos2 sampledb"` |
+| `mysql.backupStorage`          | Ubicación de almacenamiento de los backups.                      | `"exampleapp1"`            |
+| `mysql.existingSecret`         | Nombre del secret existente que contiene las credenciales.       | `""`                        |
+| `mysql.dbHost`                 | Host de la base de datos.                                         | `"mysql"`                   |
+| `mysql.dbUser`                 | Usuario de la base de datos.                                      | `"root"`                    |
+| `mysql.dbPass`                 | Contraseña de la base de datos.                                   | `"xxxxxxxxxxx"`            |
+| `mysql.deleteOldBackups`       | Si se deben eliminar los backups antiguos.                       | `false`                     |
+| `mysql.maxBackupDays`          | Número de días después de los cuales los backups antiguos deben ser eliminados. | `7`       |
 
 ### MongoDB Backup Parameters
 
