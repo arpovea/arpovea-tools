@@ -52,8 +52,8 @@ minio:
       memory: "256Mi"
   endpoint: "http://minio.minio:9000"
   existingSecret: ""
-  user: "defaultUser"
-  password: "defaultPassword"
+  user: "dummyuser"
+  password: "dummypass"
   pvcBackupName: "backups"
   cronTime: "0 3 * * *"
   pathBackup: "/miniodump"
@@ -78,8 +78,8 @@ mysql:
   backupStorage: "exampleapp1"
   existingSecret: ""
   dbHost: "mysql"
-  dbUser: "root"
-  dbPass: "xxxxxxxxxxx"
+  dbUser: "dummyuser"
+  dbPass: "dummypass"
   deleteOldBackups: false
   maxBackupDays: 7
 
@@ -100,8 +100,8 @@ mongo:
   backupStorage: "exampleapp1"
   existingSecret: ""
   dbHost: "mongodb"
-  dbUser: "admin"
-  dbPass: "xxxxxxxxxxx"
+  dbUser: "dummyuser"
+  dbPass: "dummypass"
   deleteOldBackups: false
   maxBackupDays: 7
 
@@ -121,8 +121,8 @@ pgsql:
   backupStorage: "exampleapp1"
   existingSecret: ""
   dbHost: "postgresql"
-  dbUser: "root"
-  dbPass: "xxxxxxxxxxx"
+  dbUser: "dummyuser"
+  dbPass: "dummypass"
   deleteOldBackups: false
   maxBackupDays: 7
 
@@ -141,8 +141,8 @@ redis:
   backupStorage: "exampleapp"
   existingSecret: ""
   dbHost: "redis"
-  dbUser: "root"
-  dbPass: "xxxxxxxxxxx"
+  dbUser: "dummyuser"
+  dbPass: "dummypass"
   dbPort: 6379
   waitSaveRdb: 30
   deleteOldBackups: true
