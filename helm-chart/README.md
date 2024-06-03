@@ -174,13 +174,24 @@ helm uninstall my-backup
 
 ### Redis Backup Parameters
 
-| Parameter                   | Description                                   | Default                  |
-|-----------------------------|-----------------------------------------------|--------------------------|
-| `redis.serviceName`         | Nombre del servicio para el cronjob de Redis. | `"redisdump"`            |
-| `redis.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
-| `redis.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
-| `redis.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
-| `redis.backupStorage`       | Espacio de almacenamiento para el backup.     | `"exampleapp"`           |
+| Parameter                         | Description                                                      | Default                     |
+|-----------------------------------|------------------------------------------------------------------|-----------------------------|
+| `redis.serviceName`               | Nombre del servicio para el cronjob de Redis.                    | `redisdump`                 |
+| `redis.resources.requests.cpu`    | CPU solicitada para el cronjob de Redis.                         | `100m`                      |
+| `redis.resources.requests.memory` | Memoria solicitada para el cronjob de Redis.                     | `128Mi`                     |
+| `redis.resources.limits.cpu`      | Límite de CPU para el cronjob de Redis.                          | `200m`                      |
+| `redis.resources.limits.memory`   | Límite de memoria para el cronjob de Redis.                      | `256Mi`                     |
+| `redis.pvcBackupName`             | Nombre del PVC donde se almacenan los backups de Redis.          | `backups`                   |
+| `redis.cronTime`                  | Cronograma para la ejecución del cronjob.                        | `*/5 * * * *`               |
+| `redis.backupStorage`             | Ubicación de almacenamiento de los backups de Redis.             | `exampleapp`                |
+| `redis.existingSecret`            | Nombre del secret existente que contiene las credenciales de Redis. | `""`                     |
+| `redis.dbHost`                    | Host de la base de datos Redis.                                  | `redis`                     |
+| `redis.dbUser`                    | Usuario de la base de datos Redis.                               | `root`                      |
+| `redis.dbPass`                    | Contraseña de la base de datos Redis.                            | `xxxxxxxxxxx`               |
+| `redis.dbPort`                    | Puerto de la base de datos Redis.                                | `6379`                      |
+| `redis.waitSaveRdb`               | Tiempo de espera para guardar el archivo RDB de Redis.           | `30`                        |
+| `redis.deleteOldBackups`          | Si se deben eliminar los backups antiguos de Redis.              | `true`                      |
+| `redis.maxBackupDays`             | Número de días después de los cuales los backups antiguos deben ser eliminados. | `7`                  |
 
 ### Rsync Backup Parameters
 
