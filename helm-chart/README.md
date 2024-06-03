@@ -154,13 +154,23 @@ helm uninstall my-backup
 
 ### PostgreSQL Backup Parameters
 
-| Parameter                   | Description                                   | Default                  |
-|-----------------------------|-----------------------------------------------|--------------------------|
-| `pgsql.serviceName`         | Nombre del servicio para el cronjob de PostgreSQL.| `"pgdump"`           |
-| `pgsql.resources`           | Recursos CPU/Memoria solicitados y límites.   | `See values.yaml`        |
-| `pgsql.pvcBackupName`       | Nombre del PVC para almacenar los backups.    | `"backups"`              |
-| `pgsql.cronTime`            | Cronograma para el job de backup.             | `"*/5 * * * *"`          |
-| `pgsql.backupDatabases`     | Bases de datos específicas para respaldar.    | `See values.yaml`        |
+| Parameter                          | Description                                                        | Default                     |
+|------------------------------------|--------------------------------------------------------------------|-----------------------------|
+| `pgsql.serviceName`                | Nombre del servicio para el cronjob de PostgreSQL.                 | `pgdump`                    |
+| `pgsql.resources.requests.cpu`     | CPU solicitada para el cronjob de PostgreSQL.                      | `100m`                      |
+| `pgsql.resources.requests.memory`  | Memoria solicitada para el cronjob de PostgreSQL.                  | `128Mi`                     |
+| `pgsql.resources.limits.cpu`       | Límite de CPU para el cronjob de PostgreSQL.                       | `200m`                      |
+| `pgsql.resources.limits.memory`    | Límite de memoria para el cronjob de PostgreSQL.                   | `256Mi`                     |
+| `pgsql.pvcBackupName`              | Nombre del PVC donde se almacenan los backups de PostgreSQL.       | `backups`                   |
+| `pgsql.cronTime`                   | Cronograma para la ejecución del cronjob.                          | `*/5 * * * *`               |
+| `pgsql.backupDatabases`            | Lista de bases de datos específicas de PostgreSQL para hacer backup. | `"basededatos1 basededatos2 sampledb"` |
+| `pgsql.backupStorage`              | Ubicación de almacenamiento de los backups de PostgreSQL.          | `"exampleapp1"`             |
+| `pgsql.existingSecret`             | Nombre del secret existente que contiene las credenciales de PostgreSQL. | `""`                     |
+| `pgsql.dbHost`                     | Host de la base de datos PostgreSQL.                               | `"postgresql"`              |
+| `pgsql.dbUser`                     | Usuario de la base de datos PostgreSQL.                            | `"root"`                    |
+| `pgsql.dbPass`                     | Contraseña de la base de datos PostgreSQL.                         | `"xxxxxxxxxxx"`             |
+| `pgsql.deleteOldBackups`           | Si se deben eliminar los backups antiguos de PostgreSQL.           | `false`                     |
+| `pgsql.maxBackupDays`              | Número de días después de los cuales los backups antiguos deben ser eliminados. | `7`                  |
 
 ### Redis Backup Parameters
 
