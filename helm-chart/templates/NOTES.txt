@@ -79,3 +79,4 @@ Para obtener más detalles sobre los recursos desplegados, puede utilizar los si
 kubectl get all -l app.kubernetes.io/instance={{ .Release.Name }}
 ```
 
+Gracias por instalar el chart arpovea-tools!
