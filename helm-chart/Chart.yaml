@@ -10,5 +10,5 @@ keywords:
   - backups
 home: https://blog.arpovea.com
 sources:
-  - https://github.com/arpovea/arpovea-tools.git
+  - https://github.com/arpovea/arpovea-tools/tree/main/helm-chart
 icon: https://github.com/arpovea/arpovea-tools/blob/main/img/logo-arpovea.png
