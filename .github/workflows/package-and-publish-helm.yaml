@@ -1,4 +1,4 @@
-name: Package and Push Helm Chart to Docker Hub
+name: Package and Push Helm Chart to GitHub Packages
 
 on:
   push:
@@ -18,11 +18,8 @@ jobs:
       with:
         version: '3.14.4'
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Login to GitHub Container Registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Extract tag name
       id: tag_name
@@ -32,9 +29,7 @@ jobs:
     - name: Package Helm Chart
       run: |
         helm package ./helm-chart --version ${{ env.tag }} --destination ./chart-packages
-        ls -la ./chart-packages
-        
-    - name: Push Helm Chart to Docker Hub
+
+    - name: Push Helm Chart to GitHub Packages
       run: |
-        helm registry login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
-        helm push $(ls ./chart-packages/*.tgz) oci://docker.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_HELM }}
+        helm push ./chart-packages/$(ls ./chart-packages/*.tgz) oci://ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
