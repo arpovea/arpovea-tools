@@ -32,7 +32,8 @@ jobs:
     - name: Package Helm Chart
       run: |
         helm package ./helm-chart --version ${{ env.tag }} --destination ./chart-packages
-
+        ls -la ./chart-packages
+        
     - name: Push Helm Chart to Docker Hub
       run: |
         helm registry login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
