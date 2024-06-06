@@ -32,4 +32,4 @@ jobs:
 
     - name: Push Helm Chart to GitHub Packages
       run: |
-        helm push ./chart-packages/$(ls ./chart-packages/*.tgz) oci://ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
+        helm push $(ls ./chart-packages/*.tgz) oci://ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
