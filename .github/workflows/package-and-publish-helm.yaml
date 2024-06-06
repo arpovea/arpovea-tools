@@ -31,5 +31,9 @@ jobs:
 
     - name: Package Helm Chart
       run: |
-        helm chart save ./helm-chart ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_HELM }}:${{ env.tag }}
-        helm chart push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_HELM }}:${{ env.tag }}
+        helm package ./helm-chart --version ${{ env.tag }} --destination ./chart-packages
+
+    - name: Push Helm Chart to Docker Hub
+      run: |
+        helm registry login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
+        helm push ./chart-packages/$(basename ./helm-chart)-${{ env.tag }}.tgz oci://docker.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_HELM }}:${{ env.tag }}
