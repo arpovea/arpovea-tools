@@ -37,4 +37,4 @@ jobs:
     - name: Push Helm Chart to Docker Hub
       run: |
         helm registry login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
-        helm push ./chart-packages/$(basename ./helm-chart)-${{ env.tag }}.tgz oci://docker.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_HELM }}:${{ env.tag }}
+        helm push $(ls ./chart-packages/*.tgz) oci://docker.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_HELM }}:${{ env.tag }}
